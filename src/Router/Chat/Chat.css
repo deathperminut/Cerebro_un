@@ -1,0 +1,626 @@
+
+/* ---------------------------------------------------
+    SEARCH NAVBAR
+  ----------------------------------------------------- */
+
+  .wrapper-search-small- .search-chats- {
+    width: 100%;
+  }
+  
+  .wrapper-search-small- .search-chats-::placeholder {
+    color: var(--color-tertiary-gray-) !important;
+    font-family: var(--font-family-regular-) !important;
+    font-size: 14px !important;
+  }
+  
+  /* ---------------------------------------------------
+      SPLASH CHAT MEDICAL
+    ----------------------------------------------------- */
+  
+  .cloud-chat- {
+    width: 120px;
+    height: auto;
+  }
+  .divsContainer{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.color-green{
+    color: #18b20a;
+}
+  .buttonElement{
+    background-color: #18b20a;
+    width: 160px;
+    height: 40px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    transition: 1s;
+}
+
+.buttonElement:hover{
+    background-color: #138a08;
+    cursor: pointer;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
+}
+  
+  .bg-chats- {
+    background-image: url('../../assets/images/Fondo_Chat.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden !important;
+  }
+  
+  /* ---------------------------------------------------
+      REACT CHAT
+    ----------------------------------------------------- */
+  
+  .wrapper-list-chats- {
+    height: 60vh;
+    max-height: 60vh;
+    min-height: auto;
+    overflow: auto;
+  }
+  
+  .wrapper-chat- {
+    height: 56vh;
+    max-height: 56vh;
+    min-height: auto;
+    overflow: auto;
+  }
+  
+  .button-chast- {
+    width: auto;
+    height: 35px;
+  }
+  
+  .blue__{
+    color: #0463a2 !important;
+  }
+  /* .bg-transparent-{
+    background:linear-gradient(to right, #f1f7fb, #ebf4f5) !important;
+  } */
+  .offcanvas-body .chat-list .rce-container-citem .rce-citem .rce-citem-avatar {
+    padding: 0 15px 0 0px !important;
+  }
+  .mt--{
+    margin-top: 100px !important;
+  }
+  
+  .wrapper-chat-::-webkit-scrollbar-track,
+  .wrapper-list-chats-::-webkit-scrollbar-track {
+    box-shadow: var(--box-shadow-5-);
+    -webkit-box-shadow: var(--box-shadow-5-);
+    background-color: var(--color-secondary-white-);
+  }
+  
+  .wrapper-chat-::-webkit-scrollbar,
+  .wrapper-list-chats-::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+    background-color: var(--color-secondary-white-);
+  }
+  
+  .wrapper-chat-::-webkit-scrollbar-thumb,
+  .wrapper-list-chats-::-webkit-scrollbar-thumb {
+    background-color: var(--color-secondary-black-);
+    border: 2px solid var(--color-secondary-black-);
+  }
+  
+  .rce-citem {
+    background: transparent !important;
+    width: 100%;
+    transition: all 0.2s;
+  }
+  
+  .rce-citem:hover {
+    background: var(--color-secondary-gray-) !important;
+    width: 100%;
+    transition: all 0.2s;
+  }
+  
+  .rce-citem-body {
+    border-bottom: 0px solid transparent !important;
+    display: flex;
+    flex: 1 1;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    padding-right: 15px;
+  }
+  
+  .rce-citem-body--bottom {
+    margin-top: 0px !important;
+  }
+  
+  .rce-citem-body--top-title {
+    color: var(--color-black-);
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    font-family: var(--font-family-regular-);
+    line-height: 1.25 !important;
+  }
+  
+  .rce-citem-body--bottom-title {
+    color: var(--color-black-) !important;
+    font-size: 13px !important;
+    line-height: 1.25 !important;
+    font-family: var(--font-family-regular-);
+    font-weight: 500 !important;
+  }
+  
+  .rce-citem-body--top-time {
+    color: var(--color-quaternary-gray-) !important;
+    font-size: 12px;
+    line-height: 1.25 !important;
+    font-family: var(--font-family-regular-);
+    font-weight: 500 !important;
+  }
+  
+  .rce-citem-body--bottom-status span {
+    background: var(--color-secondary-purple-) !important;
+    border-radius: 100%;
+    color: var(--color-tertiary-white-);
+    line-height: 1.25 !important;
+    font-family: var(--font-family-regular-);
+    font-size: 11px;
+    font-weight: 500 !important;
+    text-align: center;
+  }
+  
+  .rce-navbar.light {
+    background: var(--color-secondary-gray-) !important;
+  }
+  
+  .rce-mbox {
+    box-shadow: var(--box-shadow-15-) !important;
+  }
+  
+  .rce-mbox-right-notch {
+    filter: drop-shadow(2px 0 1px var(--color-secondary-black-rgba-)) !important;
+  }
+  
+  .rce-mbox-left-notch {
+    filter: drop-shadow(0px 0px 2px var(--color-secondary-black-rgba-)) !important;
+  }
+  
+  .rce-avatar-container .rce-avatar {
+    border-radius: 50% !important;
+  }
+  
+  .rce-avatar-container .rce-avatar {
+    object-fit: cover !important;
+  }
+  
+  .card-header .rce-avatar-container.flexible .rce-avatar {
+    width: 45px !important;
+    height: 45px !important;
+  }
+  
+  .rce-mbox-title {
+    align-items: center;
+    color: var(--color-black-) !important;
+    font-size: 12.5px;
+    line-height: 1.25 !important;
+    font-family: var(--font-family-regular-);
+    font-weight: 700 !important;
+    margin: 0 0 8px;
+  }
+  
+  .rce-mbox-title--clear {
+    margin-bottom: 5px !important;
+  }
+  
+  .rce-mbox-text {
+    color: var(--color-black-) !important;
+    font-size: 12px !important;
+    line-height: 1.25 !important;
+    font-family: var(--font-family-regular-);
+    font-weight: 500 !important;
+    word-break: break-word;
+  }
+  
+  .rce-container-mbox .rce-mbox {
+    background-color: var(--color-gray-);
+  }
+  
+  .rce-container-mbox .rce-mbox .rce-mbox-body .rce-mbox-title,
+  .rce-container-mbox .rce-mbox .rce-mbox-body .rce-mbox-text {
+    color: var(--color-black-);
+  }
+  
+  .rce-container-mbox .rce-mbox .rce-mbox-left-notch {
+    fill: var(--color-gray-);
+    filter: drop-shadow(2px 0 50px var(--color-secondary-black-rgba-)) !important;
+  }
+  
+  .rce-container-mbox .rce-mbox-right {
+    background-color: var(--color-secondary-purple-) !important;
+  }
+  
+  .rce-container-mbox .rce-mbox-right .rce-mbox-body .rce-mbox-title,
+  .rce-container-mbox .rce-mbox-right .rce-mbox-body .rce-mbox-text {
+    color: var(--color-white-) !important;
+  }
+  
+  .rce-mbox-time {
+    color: var(--color-white-) !important;
+  }
+  
+  .rce-container-mbox .rce-mbox-right .rce-mbox-right-notch {
+    fill: var(--color-secondary-purple-);
+    filter: drop-shadow(2px 0 1px var(--color-secondary-black-rgba-)) !important;
+  }
+  
+  .rce-input-textarea {
+    height: 37px;
+    padding: 14px 5px !important;
+    resize: none;
+    overflow-y: hidden !important;
+  }
+  
+  .rce-container-input {
+    background: var(--color-gray-) !important;
+    border-radius: 8px !important;
+    height: 50px !important;
+    max-height: 50px !important;
+    min-height: 50px !important;
+    box-shadow: var(--box-shadow-15-) !important;
+  }
+  
+  .rce-input {
+    color: var(--color-black-) !important;
+    font-size: 14px !important;
+    font-family: var(--font-family-regular-);
+    height: 50px !important;
+    max-height: 50px !important;
+    min-height: 50px !important;
+    background-color: var(--color-gray-);
+  }
+  
+  .rce-input::placeholder {
+    color: var(--color-quaternary-gray-) !important;
+    font-size: 14px !important;
+    font-family: var(--font-family-regular-) !important;
+  }
+  
+  .send-button- {
+    background-color: var(--color-secondary-gray-) !important;
+    color: var(--color-black-) !important;
+    font-family: var(--font-family-regular-);
+    font-weight: 500 !important;
+    font-size: 12px !important;
+  }
+
+  /* ---------------------------------------------------
+      OFFCANVAS
+    ----------------------------------------------------- */
+  
+    .offcanvas {
+        background-color: var(--color-white-) !important;
+        transition: transform .3s ease-in-out;
+        box-shadow: var(--box-shadow-1-);
+        width: 400px !important;
+      }
+      
+      .offcanvas.offcanvas-end {
+        border-left: 0px solid transparent !important;
+      }
+      
+      .offcanvas.offcanvas-start {
+        border-right: 0px solid transparent !important;
+      }
+      
+      .offcanvas.offcanvas-bottom {
+        border-top: 0px solid transparent !important;
+        border-right: 0px solid transparent !important;
+      }
+      
+      .offcanvas-header .btn-close {
+        width: 2.813em;
+        height: 2.813em;
+        color: #7A86A1 !important;
+        /*background: transparent url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e) center/1em auto no-repeat;*/
+        background-size: 0.8rem !important;
+        border: 1px solid #EBEBEB;
+        padding: 0 !important;
+        border-radius: 100%;
+        -webkit-border-radius: 100%;
+        -moz-border-radius: 100%;
+        -khtml-border-radius: 100%;
+        text-decoration: none;
+        opacity: 1 !important;
+      }
+      
+      .btn-close-offcanvas {
+        width: 32px !important;
+        height: 32px !important;
+        position: absolute;
+        right: 2rem;
+        cursor: pointer;
+        border-radius: 6rem;
+        -webkit-border-radius: 6rem;
+        -moz-border-radius: 6rem;
+        -khtml-border-radius: 6rem;
+        background-color: var(--color-white-);
+        border: 0px solid transparent;
+        box-shadow: var(--box-shadow-1-) !important;
+        color: var(--color-black-) !important;
+        transition: all 0.4s ease;
+      }
+      
+      .btn-close-offcanvas:hover {
+        box-shadow: var(--box-shadow-1-) !important;
+      }
+      
+      .offcanvas.offcanvas-bottom- {
+        background-color: var(--color-white-) !important;
+        transition: transform .3s ease-in-out;
+        box-shadow: var(--box-shadow-9-);
+        border-top: 0px solid transparent !important;
+        width: 100% !important;
+        height: 100vh !important;
+      }
+      
+      .offcanvas.offcanvas-bottom.dashboard-filters- {
+        height: 40vh !important;
+        border-top: 0px solid transparent !important;
+      }
+  
+  /* ---------------------------------------------------
+          MEDIAQUERIES
+      ----------------------------------------------------- */
+  
+  @media (min-width: 0px) and (max-width: 359.98px) {
+  
+    /* ---------------------------------------------------
+      REACT CHAT
+    ----------------------------------------------------- */
+  
+    .wrapper-list-chats- {
+      max-height: 45vh;
+    }
+  
+    .wrapper-chat- {
+      max-height: 56vh;
+    }
+  
+    /* ---------------------------------------------------
+      SPLASH CHAT MEDICAL
+    ----------------------------------------------------- */
+  
+    .cloud-chat- {
+      width: 100px;
+      height: auto;
+    }
+
+    .braincontainer{
+      min-width: 100% !important;
+    }
+    
+  
+  }
+  
+  @media (min-width: 360px) and (max-width: 575.98px) {
+  
+    /* ---------------------------------------------------
+      REACT CHAT
+    ----------------------------------------------------- */
+  
+    .wrapper-list-chats- {
+      max-height: 45vh;
+    }
+  
+    .wrapper-chat- {
+      max-height: 56vh;
+    }
+  
+    /* ---------------------------------------------------
+      SPLASH CHAT MEDICAL
+    ----------------------------------------------------- */
+  
+    .cloud-chat- {
+      width: 105px;
+      height: auto;
+    }
+    .braincontainer{
+      min-width: 100% !important;
+    }
+  
+  }
+  
+  @media (min-width: 576px) and (max-width: 767.98px) {
+  
+    /* ---------------------------------------------------
+      REACT CHAT
+    ----------------------------------------------------- */
+  
+    .wrapper-list-chats- {
+      max-height: 45vh;
+    }
+  
+    .wrapper-chat- {
+      max-height: 56vh;
+    }
+  
+    /* ---------------------------------------------------
+      SPLASH CHAT MEDICAL
+    ----------------------------------------------------- */
+  
+    .cloud-chat- {
+      width: 190px;
+      height: auto;
+    }
+    .braincontainer{
+      min-width: 100% !important;
+    }
+  
+  }
+  
+  @media (min-width: 768px) and (max-width: 991.98px) {
+  
+    /* ---------------------------------------------------
+      REACT CHAT
+    ----------------------------------------------------- */
+  
+    .wrapper-list-chats- {
+      max-height: 45vh;
+    }
+  
+    .wrapper-chat- {
+      max-height: 56vh;
+    }
+    .braincontainer{
+      min-width: 100% !important;
+    }
+  
+    /* ---------------------------------------------------
+      SPLASH CHAT MEDICAL
+    ----------------------------------------------------- */
+  
+    .cloud-chat- {
+      width: 100px;
+      height: auto;
+    }
+  
+  }
+  
+  @media (min-width: 992px) and (max-width: 1199.98px) {
+  
+    /* ---------------------------------------------------
+      REACT CHAT
+    ----------------------------------------------------- */
+  
+    .wrapper-list-chats- {
+      max-height: 56vh;
+    }
+  
+    .wrapper-chat- {
+      max-height: 56vh;
+    }
+  
+    /* ---------------------------------------------------
+      SPLASH CHAT MEDICAL
+    ----------------------------------------------------- */
+  
+    .cloud-chat- {
+      width: 100px;
+      height: auto;
+    }
+  
+  }
+  
+  @media (min-width: 1200px) and (max-width: 1399.98px) {
+  
+    /* ---------------------------------------------------
+      REACT CHAT
+    ----------------------------------------------------- */
+  
+    .wrapper-list-chats- {
+      max-height: 56vh;
+    }
+  
+    .wrapper-chat- {
+      max-height: 56vh;
+    }
+  
+    /* ---------------------------------------------------
+      SPLASH CHAT MEDICAL
+    ----------------------------------------------------- */
+  
+    .cloud-chat- {
+      width: 100px;
+      height: auto;
+    }
+  
+  }
+  
+  @media (min-width: 1400px) and (max-width: 1919.98px) {
+  
+    /* ---------------------------------------------------
+      REACT CHAT
+    ----------------------------------------------------- */
+  
+    .wrapper-list-chats- {
+      max-height: 56vh;
+    }
+  
+    .wrapper-chat- {
+      max-height: 56vh;
+    }
+  
+    /* ---------------------------------------------------
+      SPLASH CHAT MEDICAL
+    ----------------------------------------------------- */
+  
+    .cloud-chat- {
+      width: 110px;
+      height: auto;
+    }
+  
+  }
+  
+  @media (min-width: 1920px) and (max-width: 2699.98px) {
+  
+    /* ---------------------------------------------------
+      REACT CHAT
+    ----------------------------------------------------- */
+  
+    .wrapper-list-chats- {
+      max-height: 56vh;
+    }
+  
+    .wrapper-chat- {
+      max-height: 56vh;
+    }
+  
+    /* ---------------------------------------------------
+      SPLASH CHAT MEDICAL
+    ----------------------------------------------------- */
+  
+    .cloud-chat- {
+      width: 80px;
+      height: auto;
+    }
+  
+  }
+.buttonElementDelete{
+    background-color: #ee707a;
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    transition: 1s;
+    cursor: pointer;
+}
+.buttonElementDelete:hover{
+  transform: scale(1.15);
+}
+.containerIconChat{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #c3e5f8;
+    border-bottom: 1px solid rgb(220, 235, 248);
+    padding-left: 30px;
+    padding-right: 30px;
+}
+/* 
+.braincontainer{
+  height: 100px !important;
+}  */
+
