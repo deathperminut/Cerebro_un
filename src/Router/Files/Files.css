@@ -1,0 +1,347 @@
+.bodyFiles{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10%;
+    align-items: center;
+}
+.descriptionFiles{
+    width: 100%;
+    display: flex;
+    max-width: 900px;
+    align-items: center;
+    justify-content: center;
+}
+
+.divSelect{
+    width: 55% !important;
+    max-width: 1000px;
+    align-items: center;
+    justify-content: center;
+}
+
+.FilesContainer{
+    width: 80%;
+    max-width: 1000px;
+    background-color: rgb(62, 62, 62);
+    border-radius: 40px;
+    min-height: 500px;
+    max-height: 600px;
+    margin-left: 30px !important;
+    margin-right: 30px !important;
+}
+
+
+/* ---------------------------------------------------
+    TABLES MEDICAL HISTORY
+  ----------------------------------------------------- */
+
+  .table-responsive::-webkit-scrollbar-track {
+    box-shadow: var(--box-shadow-5-);
+    -webkit-box-shadow: var(--box-shadow-5-);
+    background-color: var(--color-tertiary-white-);
+    border-radius: 1.875rem;
+    -webkit-border-radius: 1.875rem;
+    -moz-border-radius: 1.875rem;
+    -khtml-border-radius: 1.875rem;
+  }
+  
+  .table-responsive::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+    background-color: var(--color-tertiary-white-);
+    border-radius: 1.875rem;
+    -webkit-border-radius: 1.875rem;
+    -moz-border-radius: 1.875rem;
+    -khtml-border-radius: 1.875rem;
+  }
+  
+  .table-responsive::-webkit-scrollbar-thumb {
+    background-color: gray !important;
+    border: 2px solid var(--color-secondary-gray-) !important;
+    border-radius: 1.875rem;
+    -webkit-border-radius: 1.875rem;
+    -moz-border-radius: 1.875rem;
+    -khtml-border-radius: 1.875rem;
+  }
+  
+  .table-general- .table {
+    width: 100% !important;
+    table-layout: auto;
+    overflow: auto;
+  }
+  
+  .table-general- .table>thead {
+    position: sticky;
+    top: 0;
+    border-width: 0px 0px !important;
+    border-color: transparent !important;
+  }
+  
+  .table-general- .table thead tr {
+    border-width: 0px 0px 0px 0px !important;
+  }
+  
+  .table-general- .table-responsive .table thead tr th {
+    white-space: pre !important;
+    white-space: normal !important;
+    line-height: 1 !important;
+  }
+  
+  .table-general- .table-responsive thead>tr>th {
+    cursor: pointer;
+    background-color: transparent !important;
+    border-width: 0px 0px !important;
+    border-color: transparent !important;
+    background-color: transparent !important;
+  }
+  
+  .table-general- .table th {
+    padding: .60rem !important;
+    border-radius: 20px !important;
+    background-color: transparent !important;
+  }
+  
+  .table-general- .table td {
+    padding: .50rem !important;
+    background-color: transparent !important;
+  }
+  
+  .table-general- .table tbody tr td {
+    border-width: 1px 1px !important;
+    border-color: transparent !important;
+  }
+  
+  .table-general- .table tbody tr td {
+    border-color: transparent !important;
+    /* border-width: 1px !important; */
+  }
+  
+  .table-general- .table tbody {
+    border-width: 0px 0px 0px 0px !important;
+    border-color: transparent !important;
+  }
+  
+  .table-general- .table .th-width-auto- {
+    width: auto;
+  }
+  
+  .table-general- .table .th-width-md- {
+    width: 400px;
+    min-width: 400px;
+  }
+  
+  .table-general- .table .th-width-sm- {
+    width: 200px;
+    min-width: 200px;
+  }
+  
+  .table-general- .table .th-width-xs- {
+    width: 40px;
+    min-width: 40px;
+  }
+  
+  .table-general- .table .th-width-xxs- {
+    width: 80px;
+    min-width: 80px;
+  }
+  
+  .table-general- .table tbody tr td #internal-form input.form-control,
+  .table-general- .table tbody tr td #internal-form input.form-control-plaintext {
+    width: 25px !important;
+    height: 25px !important;
+    min-height: auto !important;
+    font-size: 14px !important;
+    text-transform: uppercase;
+    text-align: center !important;
+    background-color: transparent !important;
+    border-top: 0px solid transparent !important;
+    border-left: 0px solid transparent !important;
+    border-right: 0px solid transparent !important;
+    border-bottom: 0px solid transparent !important;
+    color: white !important;
+    font-family: var(--font-family-regular-) !important;
+    border-radius: 0rem !important;
+    -webkit-border-radius: 0rem !important;
+    -moz-border-radius: 0rem !important;
+    -khtml-border-radius: 0rem !important;
+  }
+  
+  .table-general- .table tbody tr td #internal-form input.input-large-.form-control,
+  .table-general- .table tbody tr td #internal-form input.input-large-.form-control-plaintext {
+    width: 100% !important;
+    height: 100% !important;
+    background-color: transparent !important;
+    min-height: auto !important;
+    font-size: 14px !important;
+    text-transform: none !important;
+    text-align: start;
+  }
+  
+  .table-general- .table tbody tr td #internal-form input.input-large-::placeholder {
+    color: white !important; /* Color texto tabla */
+    
+  }
+  
+  .table-general- .table tbody tr td #internal-form input.form-control:focus,
+  .table-general- .table tbody tr td #internal-form input.form-control-plaintext:focus {
+    border-top: 0px solid transparent !important;
+    border-left: 0px solid transparent !important;
+    border-right: 0px solid transparent !important;
+    border-bottom: 0px solid transparent !important;
+    outline: none !important;
+    color: white !important;
+    
+    font-family: var(--font-family-regular-) !important;
+  }
+  
+  .table-general- .table tbody tr td #internal-form textarea.form-control {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: 400px;
+    font-size: 12px !important;
+    line-height: 1.25rem;
+    border-left: 0px solid transparent !important;
+    border-right: 0px solid transparent !important;
+    border-top: 0px solid transparent !important;
+    border-bottom: 0px solid transparent !important;
+    border-radius: 0.75rem !important;
+    -webkit-border-radius: 0.75rem !important;
+    -moz-border-radius: 0.75rem !important;
+    -khtml-border-radius: 0.75rem !important;
+    color: white !important;
+    resize: none;
+    
+  }
+  
+  .table-general- .table tbody tr td #internal-form textarea.form-control:focus {
+    border-bottom: 0px solid transparent !important;
+    color: white !important;
+  }
+  
+  .table-general- .table tbody tr td #internal-form textarea.form-control::placeholder {
+    color: white !important;
+    font-size: 14px !important;
+    text-transform: initial !important;
+    line-height: 1.25rem;
+  }
+  
+  .table-general- .table tbody tr td #internal-form textarea.textarea-large- {
+    height: 50px !important;
+    min-height: auto !important;
+    max-height: 400px;
+    font-size: 12px !important;
+    color: white !important;
+    resize: none;
+    padding: 15px 0px !important;
+  }
+  
+  .table-general- .table tbody tr td #internal-form textarea.textarea-large-:focus {
+    border-bottom: 0px solid transparent !important;
+    color: white !important;
+  }
+  
+  .table-general- .table tbody tr td #internal-form textarea.textarea-large-::placeholder {
+    color: white !important;
+    font-size: 14px !important;
+    text-transform: initial !important;
+    line-height: 1.25rem;
+  }
+  
+  .table-general- .table tbody tr td #internal-form .rmdp-container {
+    width: inherit;
+  }
+  
+
+  .table-general- .table.table-no-border- tbody,
+  td,
+  tfoot,
+  th,
+  thead,
+  tr {
+    border-width: 0px 0px !important;
+    border-color: transparent !important;
+    border-style: inherit !important;
+  }
+
+  .rmdp-arrow-container.rmdp-right {
+    background-color: red !important;
+  }
+  
+  .table-general- .table.table-no-border- tbody.total- {
+    background-color: transparent !important;
+    padding: 1rem;
+    border-radius: 0.75rem;
+  }
+  
+  .table-general- .table-striped>thead>tr {
+    background-color: transparent !important;
+    border-width: 0px 0 !important;
+  }
+  
+  .table-general- .table-striped>tbody>tr {
+    background-color: transparent !important;
+  }
+  
+  .table-general- .table-striped>tbody>tr:nth-of-type(odd)>* {
+    background-color: rgb(49, 49, 49) !important;
+    color: white !important;
+  }
+  
+  .table-general- .table>:not(caption)>*>* {
+    color: white !important;
+    box-shadow: var(--box-shadow-7-) !important;
+  }
+  
+  .table-general- .table tfoot {
+    height: 100px;
+  }
+  
+  .table-general- .table-bordered>:not(caption)>*>* {
+    border-width: 2px 4px !important;
+    /* border-color: var(--color-white-) !important; */
+  }
+  
+  .table-bordered>:not(caption)>* {
+    border-width: 2px 4px !important;
+    /* border-color: var(--color-white-) !important; */
+  }
+  
+  .table-general- .table-bordered.border-light.border-light {
+    /* border-color: var(--color-white-) !important; */
+  }
+  
+  .table-general- .table.table-bordered tbody tr td {
+    border-width: 2px 4px !important;
+    /* border-color: var(--color-white-) !important; */
+  }
+  
+  .table-general- .table tbody tr td.table-active {
+    background-color: transparent !important;
+    color: white !important;
+  }
+  .table-general- .table .tbody .tr .td{
+    background-color: transparent !important;
+  }
+  
+
+  .white{
+    color: #d9d9d9 !important;
+  }
+  .gray{
+    color: #ebebeb !important;
+  }
+  
+  .pdf-viewer {
+    max-width: 100%;
+    height: 700px;
+    overflow: hidden !important;
+    margin: auto;
+    overflow: auto;
+  }
+  
+  .pdf-viewer canvas {
+    width: 100%;
+    height: 100%;
+  }
