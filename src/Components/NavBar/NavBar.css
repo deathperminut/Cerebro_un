@@ -1,0 +1,24 @@
+.NavBar{
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    position: fixed;
+    background-color:   #c0c9f41e ;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.textNav:hover{
+    color: rgb(119, 119, 119) !important;
+}
+.nameNavbar{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    justify-content: start;
+}
+

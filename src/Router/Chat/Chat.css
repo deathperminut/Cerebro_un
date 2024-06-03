@@ -34,7 +34,7 @@
     color: #18b20a;
 }
   .buttonElement{
-    background-color: #18b20a;
+    background-color: #511a6a;
     width: 160px;
     height: 40px;
     border-radius: 20px;
@@ -46,7 +46,7 @@
 }
 
 .buttonElement:hover{
-    background-color: #138a08;
+    background-color: #7c528f;
     cursor: pointer;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
 }
