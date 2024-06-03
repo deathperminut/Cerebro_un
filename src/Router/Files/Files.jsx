@@ -6,8 +6,20 @@ import makeAnimated from 'react-select/animated';
 import CreateCategory from '../../Components/CreateCategory/CreateCategory';
 import EditCategory from '../../Components/EditCategory/EditCategory';
 import { MdAutoDelete } from "react-icons/md";
+import { IoIosClose } from "react-icons/io";
 import { FaFileUpload } from "react-icons/fa";
+import ProgressBar from 'react-bootstrap/ProgressBar';
+import { FcFile } from "react-icons/fc";
 import { IoDocuments } from "react-icons/io5";
+import Step_1 from './Components/Step_1/Step_1';
+import Step_2 from './Components/Step_2/Step_2';
+import Step_3 from './Components/Step_3/Step_3';
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import { MdOutlineDeleteOutline } from "react-icons/md";
+
+
+
+
 const { NoOptionsMessage } = components;
 
 
@@ -257,6 +269,21 @@ export default function Files() {
     const [modalShow2,setModalShow2] = React.useState(false);
 
 
+    const [show3, setShow3] = React.useState(false);
+
+    const handleClose3 = () => setShow3(false);
+    const handleShow3 = () => setShow3(true);
+
+    const [show4, setShow4] = React.useState(false);
+
+    const handleClose4 = () => setShow4(false);
+    const handleShow4 = () => setShow4(true);
+
+    /* useState */
+
+    const [state,setState] = React.useState('1');
+
+
     return (
         <> 
             <NavBar></NavBar>
@@ -320,14 +347,14 @@ export default function Files() {
                                             <td className='align-middle'>
                                                 <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
                                                     <div  className='checks-radios- me-3'>
-                                                        <IoDocuments size={20} color='white' cursor={'pointer'}></IoDocuments>
+                                                        <IoDocuments size={20} color='white' cursor={'pointer'} onClick={handleShow3}></IoDocuments>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td className='align-middle'>
                                                 <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
                                                     <div  className='checks-radios- me-3'>
-                                                        <FaFileUpload size={20} color='white' cursor={'pointer'}></FaFileUpload>
+                                                        <FaFileUpload size={20} color='white' cursor={'pointer'} onClick={handleShow4}></FaFileUpload>
                                                     </div>
                                                 </div>
                                             </td>
@@ -621,11 +648,351 @@ export default function Files() {
                     </div>
                 </div>
             </div>
+            {/* MODALS CRUD CATEGORIES */}
             <CreateCategory  show={modalShow}
             onHide={()=>setModalShow(false)}></CreateCategory>
 
             <EditCategory  show={modalShow2}
             onHide={()=>setModalShow2(false)}></EditCategory>
+            {/* OFF CANVAS CRUD FILES */}
+
+            <Offcanvas className="offcanvasBodyV2" show={show3} onHide={handleClose3}>
+                <Offcanvas.Header closeButton className='offcanvas-header pb-4 padding-40-'>
+                    <h2 className='m-0 p-0 lh-sm fs-3- ff-monse-regular- fw-bold tx-dark-purple- font_medium' style={{'color':'#FFF'}}>Documentos</h2>
+                    <button onClick={handleClose3} id='buttonClose' type="button"
+                        className='btn-close-offcanvas'
+                        style={{'display':'flex',alignItems:'center','justifyContent':'center'}}
+                        data-bs-dismiss="offcanvas">
+                        <IoIosClose size={30} className='fa icon-close'></IoIosClose>
+                    </button>
+                    </Offcanvas.Header>
+                    <Offcanvas.Body className='offcanvas-body' style={{'width':'100%','display':'flex','justifyContent':'center','flexDirection':'column','alignItems':'center'}}>
+                        <div className='descriptionFiles'>
+                                <p className='whiteV2 font_medium' style={{'textAlign':'center'}}>Aqui podras ver todos los documentos asociados a la categoria especifica que ya fueron procesados.</p>
+                        </div>
+                        <div className='FilesContainer flex-wrap overflow-y' style={{'marginTop':'40px','padding':'20px','display':'flex','flexDirection':'row'}}>
+                                    <div  className='row row-cols-auto d-flex flex-wrap justify-content-center align-items-start align-self-start justify-content-sm-center align-items-sm-start align-self-sm-start justify-content-md-center align-items-md-start align-self-md-start justify-content-lg-start align-items-lg-start align-self-lg-start justify-content-xl-start align-items-xl-start align-self-xl-start justify-content-xxl-start align-items-xxl-start align-self-xxl-start g-4 ps-2 pe-2'>
+                                                <div className='col d-flex flex-column justify-content-center align-items-center align-self-start wrapper-card-file-'>
+                                                    <div style={{'marginBottom':'20px'}}  id="card-file" className='w-100 d-flex flex-row justify-content-center align-items-center align-self-center cursor- focus background-linear-1'>
+                                                    <div className='card overflow-out border-0 position-relative  bs-1-'>
+                                                        <div className='notiDiv deleteButton'>
+                                                        <span className='font_medium' style={{'cursor':'pointer'}} >X</span>
+                                                        </div>
+                                                        <div  className='w-100 h-100 d-flex flex-row justify-content-center align-items-center align-self-center'>
+                                                        <FcFile size={60} color={'#fff'}></FcFile>
+                                                        </div>
+                                                        <span className='font_medium numberInform'>{'1'}</span>
+                                                    </div>
+                                                    </div>
+                                                    <div  className='w-auto mt-3 name_container' style={{'width':'100px'}}>
+                                                    <p className='m-0 p-0 lh-sm fs-6-  fw-normal text-center  font_medium name_container' style={{'width':'100px',fontSize:'12px'}} data-bs-toggle="modal" data-bs-target="#edit-folder" >{'Archivo.txt'}</p>
+                                                    </div>
+                                                </div>
+                                    </div>
+                                    <div  className='row row-cols-auto d-flex flex-wrap justify-content-center align-items-start align-self-start justify-content-sm-center align-items-sm-start align-self-sm-start justify-content-md-center align-items-md-start align-self-md-start justify-content-lg-start align-items-lg-start align-self-lg-start justify-content-xl-start align-items-xl-start align-self-xl-start justify-content-xxl-start align-items-xxl-start align-self-xxl-start g-4 ps-2 pe-2'>
+                                                <div className='col d-flex flex-column justify-content-center align-items-center align-self-start wrapper-card-file-'>
+                                                    <div style={{'marginBottom':'20px'}}  id="card-file" className='w-100 d-flex flex-row justify-content-center align-items-center align-self-center cursor- focus background-linear-1'>
+                                                    <div className='card overflow-out border-0 position-relative  bs-1-'>
+                                                        <div className='notiDiv deleteButton'>
+                                                        <span className='font_medium' style={{'cursor':'pointer'}} >X</span>
+                                                        </div>
+                                                        <div  className='w-100 h-100 d-flex flex-row justify-content-center align-items-center align-self-center'>
+                                                        <FcFile size={60} color={'#fff'}></FcFile>
+                                                        </div>
+                                                        <span className='font_medium numberInform'>{'1'}</span>
+                                                    </div>
+                                                    </div>
+                                                    <div  className='w-auto mt-3 name_container' style={{'width':'100px'}}>
+                                                    <p className='m-0 p-0 lh-sm fs-6-  fw-normal text-center  font_medium name_container' style={{'width':'100px',fontSize:'12px'}} data-bs-toggle="modal" data-bs-target="#edit-folder" >{'Archivo.txt'}</p>
+                                                    </div>
+                                                </div>
+                                    </div>
+                                    <div  className='row row-cols-auto d-flex flex-wrap justify-content-center align-items-start align-self-start justify-content-sm-center align-items-sm-start align-self-sm-start justify-content-md-center align-items-md-start align-self-md-start justify-content-lg-start align-items-lg-start align-self-lg-start justify-content-xl-start align-items-xl-start align-self-xl-start justify-content-xxl-start align-items-xxl-start align-self-xxl-start g-4 ps-2 pe-2'>
+                                                <div className='col d-flex flex-column justify-content-center align-items-center align-self-start wrapper-card-file-'>
+                                                    <div style={{'marginBottom':'20px'}}  id="card-file" className='w-100 d-flex flex-row justify-content-center align-items-center align-self-center cursor- focus background-linear-1'>
+                                                    <div className='card overflow-out border-0 position-relative  bs-1-'>
+                                                        <div className='notiDiv deleteButton'>
+                                                        <span className='font_medium' style={{'cursor':'pointer'}} >X</span>
+                                                        </div>
+                                                        <div  className='w-100 h-100 d-flex flex-row justify-content-center align-items-center align-self-center'>
+                                                        <FcFile size={60} color={'#fff'}></FcFile>
+                                                        </div>
+                                                        <span className='font_medium numberInform'>{'1'}</span>
+                                                    </div>
+                                                    </div>
+                                                    <div  className='w-auto mt-3 name_container' style={{'width':'100px'}}>
+                                                    <p className='m-0 p-0 lh-sm fs-6-  fw-normal text-center  font_medium name_container' style={{'width':'100px',fontSize:'12px'}} data-bs-toggle="modal" data-bs-target="#edit-folder" >{'Archivo.txt'}</p>
+                                                    </div>
+                                                </div>
+                                    </div>
+                                    <div  className='row row-cols-auto d-flex flex-wrap justify-content-center align-items-start align-self-start justify-content-sm-center align-items-sm-start align-self-sm-start justify-content-md-center align-items-md-start align-self-md-start justify-content-lg-start align-items-lg-start align-self-lg-start justify-content-xl-start align-items-xl-start align-self-xl-start justify-content-xxl-start align-items-xxl-start align-self-xxl-start g-4 ps-2 pe-2'>
+                                                <div className='col d-flex flex-column justify-content-center align-items-center align-self-start wrapper-card-file-'>
+                                                    <div style={{'marginBottom':'20px'}}  id="card-file" className='w-100 d-flex flex-row justify-content-center align-items-center align-self-center cursor- focus background-linear-1'>
+                                                    <div className='card overflow-out border-0 position-relative  bs-1-'>
+                                                        <div className='notiDiv deleteButton'>
+                                                        <span className='font_medium' style={{'cursor':'pointer'}} >X</span>
+                                                        </div>
+                                                        <div  className='w-100 h-100 d-flex flex-row justify-content-center align-items-center align-self-center'>
+                                                        <FcFile size={60} color={'#fff'}></FcFile>
+                                                        </div>
+                                                        <span className='font_medium numberInform'>{'1'}</span>
+                                                    </div>
+                                                    </div>
+                                                    <div  className='w-auto mt-3 name_container' style={{'width':'100px'}}>
+                                                    <p className='m-0 p-0 lh-sm fs-6-  fw-normal text-center  font_medium name_container' style={{'width':'100px',fontSize:'12px'}} data-bs-toggle="modal" data-bs-target="#edit-folder" >{'Archivo.txt'}</p>
+                                                    </div>
+                                                </div>
+                                    </div>
+                                    <div  className='row row-cols-auto d-flex flex-wrap justify-content-center align-items-start align-self-start justify-content-sm-center align-items-sm-start align-self-sm-start justify-content-md-center align-items-md-start align-self-md-start justify-content-lg-start align-items-lg-start align-self-lg-start justify-content-xl-start align-items-xl-start align-self-xl-start justify-content-xxl-start align-items-xxl-start align-self-xxl-start g-4 ps-2 pe-2'>
+                                                <div className='col d-flex flex-column justify-content-center align-items-center align-self-start wrapper-card-file-'>
+                                                    <div style={{'marginBottom':'20px'}}  id="card-file" className='w-100 d-flex flex-row justify-content-center align-items-center align-self-center cursor- focus background-linear-1'>
+                                                    <div className='card overflow-out border-0 position-relative  bs-1-'>
+                                                        <div className='notiDiv deleteButton'>
+                                                        <span className='font_medium' style={{'cursor':'pointer'}} >X</span>
+                                                        </div>
+                                                        <div  className='w-100 h-100 d-flex flex-row justify-content-center align-items-center align-self-center'>
+                                                        <FcFile size={60} color={'#fff'}></FcFile>
+                                                        </div>
+                                                        <span className='font_medium numberInform'>{'1'}</span>
+                                                    </div>
+                                                    </div>
+                                                    <div  className='w-auto mt-3 name_container' style={{'width':'100px'}}>
+                                                    <p className='m-0 p-0 lh-sm fs-6-  fw-normal text-center  font_medium name_container' style={{'width':'100px',fontSize:'12px'}} data-bs-toggle="modal" data-bs-target="#edit-folder" >{'Archivo.txt'}</p>
+                                                    </div>
+                                                </div>
+                                    </div>
+                                    <div  className='row row-cols-auto d-flex flex-wrap justify-content-center align-items-start align-self-start justify-content-sm-center align-items-sm-start align-self-sm-start justify-content-md-center align-items-md-start align-self-md-start justify-content-lg-start align-items-lg-start align-self-lg-start justify-content-xl-start align-items-xl-start align-self-xl-start justify-content-xxl-start align-items-xxl-start align-self-xxl-start g-4 ps-2 pe-2'>
+                                                <div className='col d-flex flex-column justify-content-center align-items-center align-self-start wrapper-card-file-'>
+                                                    <div style={{'marginBottom':'20px'}}  id="card-file" className='w-100 d-flex flex-row justify-content-center align-items-center align-self-center cursor- focus background-linear-1'>
+                                                    <div className='card overflow-out border-0 position-relative  bs-1-'>
+                                                        <div className='notiDiv deleteButton'>
+                                                        <span className='font_medium' style={{'cursor':'pointer'}} >X</span>
+                                                        </div>
+                                                        <div  className='w-100 h-100 d-flex flex-row justify-content-center align-items-center align-self-center'>
+                                                        <FcFile size={60} color={'#fff'}></FcFile>
+                                                        </div>
+                                                        <span className='font_medium numberInform'>{'1'}</span>
+                                                    </div>
+                                                    </div>
+                                                    <div  className='w-auto mt-3 name_container' style={{'width':'100px'}}>
+                                                    <p className='m-0 p-0 lh-sm fs-6-  fw-normal text-center  font_medium name_container' style={{'width':'100px',fontSize:'12px'}} data-bs-toggle="modal" data-bs-target="#edit-folder" >{'Archivo.txt'}</p>
+                                                    </div>
+                                                </div>
+                                    </div>
+                                    <div  className='row row-cols-auto d-flex flex-wrap justify-content-center align-items-start align-self-start justify-content-sm-center align-items-sm-start align-self-sm-start justify-content-md-center align-items-md-start align-self-md-start justify-content-lg-start align-items-lg-start align-self-lg-start justify-content-xl-start align-items-xl-start align-self-xl-start justify-content-xxl-start align-items-xxl-start align-self-xxl-start g-4 ps-2 pe-2'>
+                                                <div className='col d-flex flex-column justify-content-center align-items-center align-self-start wrapper-card-file-'>
+                                                    <div style={{'marginBottom':'20px'}}  id="card-file" className='w-100 d-flex flex-row justify-content-center align-items-center align-self-center cursor- focus background-linear-1'>
+                                                    <div className='card overflow-out border-0 position-relative  bs-1-'>
+                                                        <div className='notiDiv deleteButton'>
+                                                        <span className='font_medium' style={{'cursor':'pointer'}} >X</span>
+                                                        </div>
+                                                        <div  className='w-100 h-100 d-flex flex-row justify-content-center align-items-center align-self-center'>
+                                                        <FcFile size={60} color={'#fff'}></FcFile>
+                                                        </div>
+                                                        <span className='font_medium numberInform'>{'1'}</span>
+                                                    </div>
+                                                    </div>
+                                                    <div  className='w-auto mt-3 name_container' style={{'width':'100px'}}>
+                                                    <p className='m-0 p-0 lh-sm fs-6-  fw-normal text-center  font_medium name_container' style={{'width':'100px',fontSize:'12px'}} data-bs-toggle="modal" data-bs-target="#edit-folder" >{'Archivo.txt'}</p>
+                                                    </div>
+                                                </div>
+                                    </div>
+                                    <div  className='row row-cols-auto d-flex flex-wrap justify-content-center align-items-start align-self-start justify-content-sm-center align-items-sm-start align-self-sm-start justify-content-md-center align-items-md-start align-self-md-start justify-content-lg-start align-items-lg-start align-self-lg-start justify-content-xl-start align-items-xl-start align-self-xl-start justify-content-xxl-start align-items-xxl-start align-self-xxl-start g-4 ps-2 pe-2'>
+                                                <div className='col d-flex flex-column justify-content-center align-items-center align-self-start wrapper-card-file-'>
+                                                    <div style={{'marginBottom':'20px'}}  id="card-file" className='w-100 d-flex flex-row justify-content-center align-items-center align-self-center cursor- focus background-linear-1'>
+                                                    <div className='card overflow-out border-0 position-relative  bs-1-'>
+                                                        <div className='notiDiv deleteButton'>
+                                                        <span className='font_medium' style={{'cursor':'pointer'}} >X</span>
+                                                        </div>
+                                                        <div  className='w-100 h-100 d-flex flex-row justify-content-center align-items-center align-self-center'>
+                                                        <FcFile size={60} color={'#fff'}></FcFile>
+                                                        </div>
+                                                        <span className='font_medium numberInform'>{'1'}</span>
+                                                    </div>
+                                                    </div>
+                                                    <div  className='w-auto mt-3 name_container' style={{'width':'100px'}}>
+                                                    <p className='m-0 p-0 lh-sm fs-6-  fw-normal text-center  font_medium name_container' style={{'width':'100px',fontSize:'12px'}} data-bs-toggle="modal" data-bs-target="#edit-folder" >{'Archivo.txt'}</p>
+                                                    </div>
+                                                </div>
+                                    </div>
+                                    <div  className='row row-cols-auto d-flex flex-wrap justify-content-center align-items-start align-self-start justify-content-sm-center align-items-sm-start align-self-sm-start justify-content-md-center align-items-md-start align-self-md-start justify-content-lg-start align-items-lg-start align-self-lg-start justify-content-xl-start align-items-xl-start align-self-xl-start justify-content-xxl-start align-items-xxl-start align-self-xxl-start g-4 ps-2 pe-2'>
+                                                <div className='col d-flex flex-column justify-content-center align-items-center align-self-start wrapper-card-file-'>
+                                                    <div style={{'marginBottom':'20px'}}  id="card-file" className='w-100 d-flex flex-row justify-content-center align-items-center align-self-center cursor- focus background-linear-1'>
+                                                    <div className='card overflow-out border-0 position-relative  bs-1-'>
+                                                        <div className='notiDiv deleteButton'>
+                                                        <span className='font_medium' style={{'cursor':'pointer'}} >X</span>
+                                                        </div>
+                                                        <div  className='w-100 h-100 d-flex flex-row justify-content-center align-items-center align-self-center'>
+                                                        <FcFile size={60} color={'#fff'}></FcFile>
+                                                        </div>
+                                                        <span className='font_medium numberInform'>{'1'}</span>
+                                                    </div>
+                                                    </div>
+                                                    <div  className='w-auto mt-3 name_container' style={{'width':'100px'}}>
+                                                    <p className='m-0 p-0 lh-sm fs-6-  fw-normal text-center  font_medium name_container' style={{'width':'100px',fontSize:'12px'}} data-bs-toggle="modal" data-bs-target="#edit-folder" >{'Archivo.txt'}</p>
+                                                    </div>
+                                                </div>
+                                    </div>
+                                    <div  className='row row-cols-auto d-flex flex-wrap justify-content-center align-items-start align-self-start justify-content-sm-center align-items-sm-start align-self-sm-start justify-content-md-center align-items-md-start align-self-md-start justify-content-lg-start align-items-lg-start align-self-lg-start justify-content-xl-start align-items-xl-start align-self-xl-start justify-content-xxl-start align-items-xxl-start align-self-xxl-start g-4 ps-2 pe-2'>
+                                                <div className='col d-flex flex-column justify-content-center align-items-center align-self-start wrapper-card-file-'>
+                                                    <div style={{'marginBottom':'20px'}}  id="card-file" className='w-100 d-flex flex-row justify-content-center align-items-center align-self-center cursor- focus background-linear-1'>
+                                                    <div className='card overflow-out border-0 position-relative  bs-1-'>
+                                                        <div className='notiDiv deleteButton'>
+                                                        <span className='font_medium' style={{'cursor':'pointer'}} >X</span>
+                                                        </div>
+                                                        <div  className='w-100 h-100 d-flex flex-row justify-content-center align-items-center align-self-center'>
+                                                        <FcFile size={60} color={'#fff'}></FcFile>
+                                                        </div>
+                                                        <span className='font_medium numberInform'>{'1'}</span>
+                                                    </div>
+                                                    </div>
+                                                    <div  className='w-auto mt-3 name_container' style={{'width':'100px'}}>
+                                                    <p className='m-0 p-0 lh-sm fs-6-  fw-normal text-center  font_medium name_container' style={{'width':'100px',fontSize:'12px'}} data-bs-toggle="modal" data-bs-target="#edit-folder" >{'Archivo.txt'}</p>
+                                                    </div>
+                                                </div>
+                                    </div>
+
+                                    <div  className='row row-cols-auto d-flex flex-wrap justify-content-center align-items-start align-self-start justify-content-sm-center align-items-sm-start align-self-sm-start justify-content-md-center align-items-md-start align-self-md-start justify-content-lg-start align-items-lg-start align-self-lg-start justify-content-xl-start align-items-xl-start align-self-xl-start justify-content-xxl-start align-items-xxl-start align-self-xxl-start g-4 ps-2 pe-2'>
+                                                <div className='col d-flex flex-column justify-content-center align-items-center align-self-start wrapper-card-file-'>
+                                                    <div style={{'marginBottom':'20px'}}  id="card-file" className='w-100 d-flex flex-row justify-content-center align-items-center align-self-center cursor- focus background-linear-1'>
+                                                    <div className='card overflow-out border-0 position-relative  bs-1-'>
+                                                        <div className='notiDiv deleteButton'>
+                                                        <span className='font_medium' style={{'cursor':'pointer'}} >X</span>
+                                                        </div>
+                                                        <div  className='w-100 h-100 d-flex flex-row justify-content-center align-items-center align-self-center'>
+                                                        <FcFile size={60} color={'#fff'}></FcFile>
+                                                        </div>
+                                                        <span className='font_medium numberInform'>{'1'}</span>
+                                                    </div>
+                                                    </div>
+                                                    <div  className='w-auto mt-3 name_container' style={{'width':'100px'}}>
+                                                    <p className='m-0 p-0 lh-sm fs-6-  fw-normal text-center  font_medium name_container' style={{'width':'100px',fontSize:'12px'}} data-bs-toggle="modal" data-bs-target="#edit-folder" >{'Archivo.txt'}</p>
+                                                    </div>
+                                                </div>
+                                    </div>
+                                    <div  className='row row-cols-auto d-flex flex-wrap justify-content-center align-items-start align-self-start justify-content-sm-center align-items-sm-start align-self-sm-start justify-content-md-center align-items-md-start align-self-md-start justify-content-lg-start align-items-lg-start align-self-lg-start justify-content-xl-start align-items-xl-start align-self-xl-start justify-content-xxl-start align-items-xxl-start align-self-xxl-start g-4 ps-2 pe-2'>
+                                                <div className='col d-flex flex-column justify-content-center align-items-center align-self-start wrapper-card-file-'>
+                                                    <div style={{'marginBottom':'20px'}}  id="card-file" className='w-100 d-flex flex-row justify-content-center align-items-center align-self-center cursor- focus background-linear-1'>
+                                                    <div className='card overflow-out border-0 position-relative  bs-1-'>
+                                                        <div className='notiDiv deleteButton'>
+                                                        <span className='font_medium' style={{'cursor':'pointer'}} >X</span>
+                                                        </div>
+                                                        <div  className='w-100 h-100 d-flex flex-row justify-content-center align-items-center align-self-center'>
+                                                        <FcFile size={60} color={'#fff'}></FcFile>
+                                                        </div>
+                                                        <span className='font_medium numberInform'>{'1'}</span>
+                                                    </div>
+                                                    </div>
+                                                    <div  className='w-auto mt-3 name_container' style={{'width':'100px'}}>
+                                                    <p className='m-0 p-0 lh-sm fs-6-  fw-normal text-center  font_medium name_container' style={{'width':'100px',fontSize:'12px'}} data-bs-toggle="modal" data-bs-target="#edit-folder" >{'Archivo.txt'}</p>
+                                                    </div>
+                                                </div>
+                                    </div>
+                                    <div  className='row row-cols-auto d-flex flex-wrap justify-content-center align-items-start align-self-start justify-content-sm-center align-items-sm-start align-self-sm-start justify-content-md-center align-items-md-start align-self-md-start justify-content-lg-start align-items-lg-start align-self-lg-start justify-content-xl-start align-items-xl-start align-self-xl-start justify-content-xxl-start align-items-xxl-start align-self-xxl-start g-4 ps-2 pe-2'>
+                                                <div className='col d-flex flex-column justify-content-center align-items-center align-self-start wrapper-card-file-'>
+                                                    <div style={{'marginBottom':'20px'}}  id="card-file" className='w-100 d-flex flex-row justify-content-center align-items-center align-self-center cursor- focus background-linear-1'>
+                                                    <div className='card overflow-out border-0 position-relative  bs-1-'>
+                                                        <div className='notiDiv deleteButton'>
+                                                        <span className='font_medium' style={{'cursor':'pointer'}} >X</span>
+                                                        </div>
+                                                        <div  className='w-100 h-100 d-flex flex-row justify-content-center align-items-center align-self-center'>
+                                                        <FcFile size={60} color={'#fff'}></FcFile>
+                                                        </div>
+                                                        <span className='font_medium numberInform'>{'1'}</span>
+                                                    </div>
+                                                    </div>
+                                                    <div  className='w-auto mt-3 name_container' style={{'width':'100px'}}>
+                                                    <p className='m-0 p-0 lh-sm fs-6-  fw-normal text-center  font_medium name_container' style={{'width':'100px',fontSize:'12px'}} data-bs-toggle="modal" data-bs-target="#edit-folder" >{'Archivo.txt'}</p>
+                                                    </div>
+                                                </div>
+                                    </div>
+                                    <div  className='row row-cols-auto d-flex flex-wrap justify-content-center align-items-start align-self-start justify-content-sm-center align-items-sm-start align-self-sm-start justify-content-md-center align-items-md-start align-self-md-start justify-content-lg-start align-items-lg-start align-self-lg-start justify-content-xl-start align-items-xl-start align-self-xl-start justify-content-xxl-start align-items-xxl-start align-self-xxl-start g-4 ps-2 pe-2'>
+                                                <div className='col d-flex flex-column justify-content-center align-items-center align-self-start wrapper-card-file-'>
+                                                    <div style={{'marginBottom':'20px'}}  id="card-file" className='w-100 d-flex flex-row justify-content-center align-items-center align-self-center cursor- focus background-linear-1'>
+                                                    <div className='card overflow-out border-0 position-relative  bs-1-'>
+                                                        <div className='notiDiv deleteButton'>
+                                                        <span className='font_medium' style={{'cursor':'pointer'}} >X</span>
+                                                        </div>
+                                                        <div  className='w-100 h-100 d-flex flex-row justify-content-center align-items-center align-self-center'>
+                                                        <FcFile size={60} color={'#fff'}></FcFile>
+                                                        </div>
+                                                        <span className='font_medium numberInform'>{'1'}</span>
+                                                    </div>
+                                                    </div>
+                                                    <div  className='w-auto mt-3 name_container' style={{'width':'100px'}}>
+                                                    <p className='m-0 p-0 lh-sm fs-6-  fw-normal text-center  font_medium name_container' style={{'width':'100px',fontSize:'12px'}} data-bs-toggle="modal" data-bs-target="#edit-folder" >{'Archivo.txt'}</p>
+                                                    </div>
+                                                </div>
+                                    </div>
+                                    <div  className='row row-cols-auto d-flex flex-wrap justify-content-center align-items-start align-self-start justify-content-sm-center align-items-sm-start align-self-sm-start justify-content-md-center align-items-md-start align-self-md-start justify-content-lg-start align-items-lg-start align-self-lg-start justify-content-xl-start align-items-xl-start align-self-xl-start justify-content-xxl-start align-items-xxl-start align-self-xxl-start g-4 ps-2 pe-2'>
+                                                <div className='col d-flex flex-column justify-content-center align-items-center align-self-start wrapper-card-file-'>
+                                                    <div style={{'marginBottom':'20px'}}  id="card-file" className='w-100 d-flex flex-row justify-content-center align-items-center align-self-center cursor- focus background-linear-1'>
+                                                    <div className='card overflow-out border-0 position-relative  bs-1-'>
+                                                        <div className='notiDiv deleteButton'>
+                                                        <span className='font_medium' style={{'cursor':'pointer'}} >X</span>
+                                                        </div>
+                                                        <div  className='w-100 h-100 d-flex flex-row justify-content-center align-items-center align-self-center'>
+                                                        <FcFile size={60} color={'#fff'}></FcFile>
+                                                        </div>
+                                                        <span className='font_medium numberInform'>{'1'}</span>
+                                                    </div>
+                                                    </div>
+                                                    <div  className='w-auto mt-3 name_container' style={{'width':'100px'}}>
+                                                    <p className='m-0 p-0 lh-sm fs-6-  fw-normal text-center  font_medium name_container' style={{'width':'100px',fontSize:'12px'}} data-bs-toggle="modal" data-bs-target="#edit-folder" >{'Archivo.txt'}</p>
+                                                    </div>
+                                                </div>
+                                    </div>
+                        </div>
+                    </Offcanvas.Body>
+            </Offcanvas>
+
+            <Offcanvas className="offcanvasBodyV2" show={show4} onHide={handleClose4}>
+                <Offcanvas.Header closeButton className='offcanvas-header pb-4 padding-40-'>
+                    <h2 className='m-0 p-0 lh-sm fs-3- ff-monse-regular- fw-bold tx-dark-purple- font_medium' style={{'color':'#FFF'}}>Procesar documentos</h2>
+                    <button onClick={handleClose4} id='buttonClose' type="button"
+                        className='btn-close-offcanvas'
+                        style={{'display':'flex',alignItems:'center','justifyContent':'center'}}
+                        data-bs-dismiss="offcanvas">
+                        <IoIosClose size={30} className='fa icon-close'></IoIosClose>
+                    </button>
+                    </Offcanvas.Header>
+                    <Offcanvas.Body className='offcanvas-body' style={{'width':'100%','display':'flex','justifyContent':'center','flexDirection':'column','alignItems':'center'}}>
+                        <div className='descriptionFiles'>
+                                <p className='whiteV2 font_medium' style={{'textAlign':'center'}}>Aqui podras subir nuevos documentos a la respectiva categoria</p>
+                        </div>
+                        {state == '3'  ? 
+                        <ProgressBar style={{'width':'80%','maxWidth':'1000px','marginTop':'20px'}} animated now={100}  label={'Procesando...'}/> 
+                        :
+                        <></>
+                        }
+                        <div className='FilesContainer flex-wrap overflow-y' style={{'marginTop':'40px','padding':'20px','display':'flex','flexDirection':'row'}}>
+                                    {state == '1' ? 
+                                    <Step_1></Step_1>
+                                    :
+                                    <></>
+                                    }
+
+                                    {state == '2' || state == '3' ? 
+                                    <Step_2></Step_2>
+                                    :
+                                    <></>
+                                    }
+
+                                    
+                        </div>
+                        <div className='divsContainer'>
+                            <div className='buttonElement' onClick={()=>{
+                                if(state == '1'){
+                                    setState('2')
+                                }else if(state=="2"){
+                                    setState('3')
+                                }
+                            }}>
+                                <span className='white font_Light'>Siguiente</span>
+                            </div>
+                        </div>
+                    </Offcanvas.Body>
+            </Offcanvas>
         </>
     )
 }

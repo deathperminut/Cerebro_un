@@ -1,0 +1,39 @@
+.shadow{
+    width: 100%;
+    height: 300px !important;
+}
+
+.center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.LogoDrag{
+    cursor: pointer;
+}
+
+section{
+    margin-top: 20px;
+    box-shadow:
+    inset 0 -3em 3em rgba(0,0,0,0.1),
+          0.3em 0.3em 1em rgba(0, 0, 0, 0.096);
+    width: 100%; 
+    min-width: 250px;
+    min-height: 250px  !important; 
+    background-color: transparent;
+    border-radius: 1rem;
+    border:1px dashed rgb(215, 207, 220);
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-body{
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+}

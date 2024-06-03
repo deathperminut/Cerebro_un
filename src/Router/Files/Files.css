@@ -14,6 +14,11 @@
     justify-content: center;
 }
 
+.offcanvasBodyV2{
+    width: 100% !important;
+    background-color: #1c1c1c !important;
+  }
+
 .divSelect{
     width: 55% !important;
     max-width: 1000px;
@@ -25,11 +30,26 @@
     width: 80%;
     max-width: 1000px;
     background-color: rgb(62, 62, 62);
-    border-radius: 40px;
+    /* border-radius: 40px; */
     min-height: 500px;
-    max-height: 600px;
     margin-left: 30px !important;
     margin-right: 30px !important;
+    margin-bottom: 20px;
+}
+.overflow-y{
+    overflow-y: auto;
+}
+.name_container{
+    white-space: nowrap; /* Asegura que el texto se muestre en una sola línea */
+    overflow: hidden; /* Oculta el contenido que desborde el contenedor */
+    text-overflow: ellipsis; /* Añade los puntos suspensivos al final del texto visible */
+    width: 100%; /* Establece un ancho específico para el contenedor */
+    color: white !important
+}
+
+.deleteButton:hover{
+    background-color: red;
+
 }
 
 
@@ -345,3 +365,149 @@
     width: 100%;
     height: 100%;
   }
+
+
+
+  /* ---------------------------------------------------
+  CARD - FILE
+----------------------------------------------------- */
+
+.wrapper-card-file- {
+    width: auto;
+    min-width: auto;
+    max-width: 150px;
+    white-space: normal!important;
+    color: var(--color-black-);
+    transition: all 0.2s ease;
+  }
+  
+  .wrapper-card-file-:hover {
+    color: var(--color-secondary-purple-);
+  }
+  
+  #card-file .card {
+    width: 110px !important;
+    height: 110px;
+  
+    margin: 0 auto !important;
+    transition: all 0.3s ease;
+    padding: 0 !important;
+    border-radius: 0.938rem !important;
+    -webkit-border-radius: 0.938rem !important;
+    -moz-border-radius: 0.938rem !important;
+    -khtml-border-radius: 0.938rem !important;
+  }
+
+  .background-linear-1 .card{
+
+    background:linear-gradient(to right, #9a94a5, #ebf4f5);
+
+  }
+
+  .background-linear-2 .card{
+
+    background:linear-gradient(to right, #9effb6, #edf5eb);
+
+  }
+
+  .typeContainer{
+    width: 100%;
+    height: 50px;
+    max-width: 1050px;
+    margin-top:10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .TypeLogo_1{
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    background:linear-gradient(to right, #9dd0fa, #ebf4f5);
+  }
+
+  .TypeLogo_2{
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    background:linear-gradient(to right, #9effb6, #edf5eb);
+  }
+  .TypeText{
+    margin-left: 10px;
+  }
+  
+  .typeCardContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+  }
+  
+  #card-file .card:hover .button-delete-,
+  #card-file .card:focus .button-delete- {
+    display: block !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  #card-file .card:hover .button-delete-,
+  #card-file .card:focus .button-delete- {
+    display: block !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  .button-delete- {
+    display: none !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  /* ---------------------------------------------------
+    CONTAINER FOLDERS
+  ----------------------------------------------------- */
+  .focus{
+    transition: 1s;
+    position: relative;
+    top: 12px;
+  }
+  .focus:hover{
+    transform: scale(1.05);
+  }
+  .wrapper-folders- {
+    height: 500px;
+    min-height: 500px;
+    max-height: 800px;
+    overflow-x: auto !important;
+  }
+
+  .notiDiv{
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+
+    background-color: white;
+    border: 1px solid blue;
+    z-index: 60;
+    position: absolute;
+    left: 85px;
+    bottom: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    color: white; /* Cambia el color del número */
+}
+
+.numberInform{
+    position: absolute;
+    left: 40px;
+    top:40px;
+    color: white;
+}
