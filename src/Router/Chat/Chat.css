@@ -50,6 +50,14 @@
     cursor: pointer;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
 }
+
+.chat1{
+  background-color: rgb(15, 15, 15) !important;
+}
+
+.chat2{
+  background-color: rgb(60, 60, 60) !important;
+}
   
   .bg-chats- {
     background-image: url('../../assets/images/Fondo_Chat.png');
@@ -619,8 +627,11 @@
     padding-left: 30px;
     padding-right: 30px;
 }
-/* 
+.chat{
+  position: relative;
+  top: 30px;
+}
 .braincontainer{
-  height: 100px !important;
-}  */
+  background-color: rgb(60, 60, 60) !important;
+} 
 

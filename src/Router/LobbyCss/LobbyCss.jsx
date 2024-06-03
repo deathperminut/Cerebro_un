@@ -28,7 +28,7 @@ export default function LobbyCss() {
                                         <div className ='DataLandingModule' >
                                           <p className='font_medium' style={{marginTop:'20px',color:'white'}}>CEREBRO</p>
                                                 <span className='lineColor' style={{marginBottom:'20px'}}></span>
-                                          <p className='font_medium whiteV2' style={{fontSize:'12px','maxWidth':'500px','textAlign':'center'}}>Informate de la institución con nuestra IA de lenguaje natural</p>
+                                          <p className='font_medium whiteV2 datamodule' style={{fontSize:'12px','maxWidth':'500px','textAlign':'center'}}>Informate de la institución con nuestra IA de lenguaje natural</p>
                                         </div>
                                         <div className='divsContainer'>
                                           <div onClick={()=>navigate('/Chat')}  className='buttonElement'>
@@ -44,7 +44,7 @@ export default function LobbyCss() {
                                         <div className ='DataLandingModule' >
                                           <p className='font_medium' style={{marginTop:'20px',color:'white'}}>ARCHIVOS</p>
                                                 <span className='lineColor' style={{marginBottom:'20px'}}></span>
-                                          <p className='font_medium whiteV2' style={{fontSize:'12px','maxWidth':'500px','textAlign':'center'}}>Sube los documentos para que nuestro cerebro aprenda la información necesaria</p>
+                                          <p className='font_medium whiteV2 datamodule' style={{fontSize:'12px','maxWidth':'500px','textAlign':'center'}}>Sube los documentos para que nuestro cerebro aprenda la información necesaria</p>
                                         </div>
                                         <div className='divsContainer'>
                                           <div onClick={()=>navigate('/Files')}  className='buttonElement'>

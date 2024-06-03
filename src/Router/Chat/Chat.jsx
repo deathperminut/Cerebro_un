@@ -1,7 +1,7 @@
 import React from 'react'
 import './Chat.css'
 import IconClouds from '../../assets/images/Clouds_Chat.png'
-import PhotoMaleDoctor from '../../assets/images/cerebro.png'
+import PhotoMaleDoctor from '../../assets/images/cerebro_.png'
 import "react-chat-elements/dist/main.css"
 import { ChatList, Avatar, Navbar, MessageList, Input, Button } from "react-chat-elements"
 import $ from 'jquery';
@@ -11,7 +11,7 @@ import Preloader from '../../Components/Loading/Loading'
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import Swal from 'sweetalert2'
 import { getConversations, loadChatHistorial ,createConversation,getAnswer, deleteChat } from '../../chat_services/chat_services'
-
+import NavBar from '../../Components/NavBar/NavBar'
 
 export default function Chat() {
 
@@ -51,13 +51,13 @@ export default function Chat() {
 
   /* CARGO EL HISTORIAL DE CHATS */
 
-  React.useEffect(()=>{
+  // React.useEffect(()=>{
 
-    // CARGAMOS EL HISTORIAL
+  //   // CARGAMOS EL HISTORIAL
 
-    loadHistorial();
+  //   loadHistorial();
 
-  },[])
+  // },[])
 
   let [chatHistory,setChatHistory] = React.useState([]);
   let [chatSelect,setChatSelect] = React.useState(false);
@@ -348,31 +348,33 @@ export default function Chat() {
   return (
     <React.Fragment>
       {preloader  ? <Preloader></Preloader> : <></>}
-      <div className='container-fluid overflow-x-hidden'>
-        <div className='row row-cols-auto gx-2 gy-0 d-flex flex-wrap mt-4 mt--' >
-          <div className='col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 col-xxl-4  d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block'>
-            <div className='card border-0 rounded-3 w-100 h-100 bg-transparent-'>
+      <NavBar></NavBar>
+      <div className='container-fluid overflow-x-hidden' style={{'minHeight':'100vh'}}>
+        <div className='row row-cols-auto gx-2 gy-0 d-flex flex-wrap mt-4 mt-- chat' style={{'minHeight':'90vh'}}>
+          <div className='col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 col-xxl-4  d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block chat1'>
+            <div className='card border-0 rounded-3 w-100 h-100 bg-transparent- chat2'>
               <div className="card-header bg-transparent- border-0 ps-0 pe-0">
                 <h2 className='m-0 p-0 lh-sm fs-4- ff-monse-regular- fw-bold tx-dark-purple- font_medium blue__' style={{'display':'flex','alignItems':'center','justifyContent':'center'}}></h2>
                 <div className='divsContainer'>
-                                          <div className='buttonElement' onClick={getNewChat}>
+                                          <div className='buttonElement'>
                                               <span className='white font_Light'>Nuevo chat</span>
                                           </div>
                 </div>
               </div>
               <div className='card-body w-100 ps-0 pe-0 wrapper-list-chats-'>
-                <ChatList
+                
+                {/* <ChatList
                   className='chat-list'
                   dataSource={chatHistory} 
                   onClick={oldChatAccess}
-                />
+                /> */}
               </div>
             </div>
           </div>
           <div className='col-12 mb-4 d-block d-sm-block d-md-block d-lg-none d-xl-none d-xxl-none'>
           <div className='divsContainer'>
-                                          <div className='buttonElement' onClick={handleShow}>
-                                              <span className='white font_Light'>Chats</span>
+                                          <div className='buttonElement' >
+                                              <span className='white font_Light'>Nuevo chat</span>
                                           </div>
                 </div>
           </div>
@@ -451,12 +453,12 @@ export default function Chat() {
             </div>
           :
           <div className='braincontainer' style={{'minWidth':'66%'}}>
-              <div className='card border-0 rounded-3  h-100 position-relative bg-light-gray- bs-2-'>
+              <div className='card border-0 rounded-3  h-100 position-relative bg-light-gray- bs-2- braincontainer'>
                 <div className='d-flex flex-column justify-content-center align-items-center align-self-center position-absolute top-50 start-50 translate-middle'>
                   <img className='cloud-chat-' src={PhotoMaleDoctor} alt="" />
                   <div className='w-auto mt-2'>
-                    <p className='m-0 mb-1 p-0 lh-sm fs-4- ff-monse-regular- fw-bold text-center tx-dark-gray- font_medium'>Bienvenido al chat de cerebro UN</p>
-                    <p className='m-0 p-0  lh-sm fs-5- ff-monse-regular- fw-normal text-center tx-light-black-'>Envía y recibe mensajes con respecto a la información que necesites de la institución</p> 
+                    <p className='m-0 mb-1 p-0 lh-sm fs-4- ff-monse-regular- fw-bold text-center tx-dark-gray- font_medium white'>Bienvenido a cerebro</p>
+                    <p className='m-0 p-0  lh-sm fs-5- ff-monse-regular- fw-normal text-center tx-light-black- whiteV2'>Envía y recibe mensajes con respecto a la información que necesites de la institución</p> 
                   </div>
                 </div>
                 <div className="card-header bg-transparent- border-0 d-flex flex-row justify-content-start align-items-center align-self-center w-100 ps-2 pe-2">                  
