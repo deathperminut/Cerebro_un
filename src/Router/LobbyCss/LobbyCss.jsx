@@ -11,6 +11,9 @@ export default function LobbyCss() {
    
     const navigate=useNavigate();
 
+    // modal useState
+    const [modalShow,setModalShow] = React.useState(false);
+
   return (
       <>
         <NavBar></NavBar>

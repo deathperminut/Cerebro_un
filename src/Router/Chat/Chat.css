@@ -52,15 +52,20 @@
 }
 
 .chat1{
-  background-color: rgb(15, 15, 15) !important;
+  background-color: rgb(62, 62, 62) !important;
 }
 
 .chat2{
-  background-color: rgb(60, 60, 60) !important;
+  background-color: rgb(62, 62, 62) !important;
 }
-  
+
+.rce-navbar{
+  padding:0px !important;
+}
+
   .bg-chats- {
-    background-image: url('../../assets/images/Fondo_Chat.png');
+    /* background-image: url('../../assets/images/Fondo_Chat.png'); */
+    background-color: rgb(62, 62, 62) !important;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -79,8 +84,8 @@
   }
   
   .wrapper-chat- {
-    height: 56vh;
-    max-height: 56vh;
+    height: 76vh;
+    max-height: 76vh;
     min-height: auto;
     overflow: auto;
   }
@@ -507,14 +512,14 @@
       REACT CHAT
     ----------------------------------------------------- */
   
-    .wrapper-list-chats- {
+    /* .wrapper-list-chats- {
       max-height: 56vh;
     }
   
     .wrapper-chat- {
       max-height: 56vh;
     }
-  
+   */
     /* ---------------------------------------------------
       SPLASH CHAT MEDICAL
     ----------------------------------------------------- */
@@ -532,13 +537,13 @@
       REACT CHAT
     ----------------------------------------------------- */
   
-    .wrapper-list-chats- {
+    /* .wrapper-list-chats- {
       max-height: 56vh;
     }
   
     .wrapper-chat- {
       max-height: 56vh;
-    }
+    } */
   
     /* ---------------------------------------------------
       SPLASH CHAT MEDICAL
@@ -557,13 +562,13 @@
       REACT CHAT
     ----------------------------------------------------- */
   
-    .wrapper-list-chats- {
+    /* .wrapper-list-chats- {
       max-height: 56vh;
-    }
+    } */
   
-    .wrapper-chat- {
+    /* .wrapper-chat- {
       max-height: 56vh;
-    }
+    } */
   
     /* ---------------------------------------------------
       SPLASH CHAT MEDICAL
@@ -582,14 +587,14 @@
       REACT CHAT
     ----------------------------------------------------- */
   
-    .wrapper-list-chats- {
+    /* .wrapper-list-chats- {
       max-height: 56vh;
-    }
+    } */
   
-    .wrapper-chat- {
-      max-height: 56vh;
+    /* .wrapper-chat- {
+      max-height: 76vh;
     }
-  
+   */
     /* ---------------------------------------------------
       SPLASH CHAT MEDICAL
     ----------------------------------------------------- */
@@ -631,7 +636,5 @@
   position: relative;
   top: 30px;
 }
-.braincontainer{
-  background-color: rgb(60, 60, 60) !important;
-} 
+
 

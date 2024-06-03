@@ -1,0 +1,57 @@
+.modal-content{
+    background-color: #F5F5F5 !important;
+}
+.titleModal{
+    text-align: center !important;
+    color: #47097e;
+}
+.textBodyModal{
+    text-align: center;
+}
+.shadow{
+    width: 100%;
+    height: 300px !important;
+}
+.InputSelectContainer{
+    margin-top: 1rem;
+    color:rgb(40, 51, 119) !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+
+}
+.center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+/* section{
+    margin-top: 20px;
+    box-shadow:
+    inset 0 -3em 3em rgba(0,0,0,0.1),
+          0.3em 0.3em 1em rgba(0, 0, 0, 0.096);
+    max-width: 470px;
+    width: 30vw; 
+    min-width: 250px;
+    min-height: 250px  !important; 
+    background-color: transparent;
+    border-radius: 1rem;
+    border:1px dashed rgb(40, 51, 119);
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+} */
+
+.LogoDrag{
+    cursor: pointer;
+}
+
+.modal-body{
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
