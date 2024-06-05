@@ -21,7 +21,7 @@ import { MdOutlineDeleteOutline } from "react-icons/md";
 import { createCategory,deleteCategory,getCategories } from '../../Chat_backend_services/Categorias';
 import Preloader from '../../Components/Loading/Loading';
 import Swal from 'sweetalert2';
-import { getDocuments } from '../../Chat_backend_services/Documentos';
+import { deleteDocument, getDocuments } from '../../Chat_backend_services/Documentos';
 
 
 const { NoOptionsMessage } = components;
@@ -340,6 +340,33 @@ export default function Files() {
         }
  
      }
+
+
+     const DeleteDocument=async(Id)=>{
+
+        let result  = undefined
+        setPreloader(true);
+        result =  await deleteDocument(Id).catch((error)=>{
+            setPreloader(false);
+            console.log(error);
+            Swal.fire({
+                icon: 'info',
+                title: 'Problemas para eliminar documento'
+            });
+        })
+ 
+        if(result){
+            setPreloader(false);
+            Swal.fire({
+                icon: 'success',
+                title: 'Documento eliminado correctamente'
+            });
+            loadDocuments();
+            handleClose3();
+            
+        }
+ 
+     }
  
  
      const loadDocuments=async()=>{
@@ -359,7 +386,7 @@ export default function Files() {
        if(result){
          setPreloader(false);
          console.log("Documentos: ",result.data);
-         let productos = []
+         let productos = result.data
          const productosPorCategoria = productos.reduce((agrupado, producto) => {
            const categoria = producto.categoria;
            if (!agrupado[categoria]) {
@@ -557,7 +584,9 @@ export default function Files() {
                                                     <div style={{'marginBottom':'20px'}}  id="card-file" className='w-100 d-flex flex-row justify-content-center align-items-center align-self-center cursor- focus background-linear-1'>
                                                     <div className='card overflow-out border-0 position-relative  bs-1-'>
                                                         <div className='notiDiv deleteButton'>
-                                                        <span className='font_medium' style={{'cursor':'pointer'}} >X</span>
+                                                        <span className='font_medium' style={{'cursor':'pointer'}} onClick={()=>{
+                                                            DeleteDocument(obj?.id)
+                                                        }} >X</span>
                                                         </div>
                                                         <div onClick={()=>{window.open(obj?.archivo)}}  className='w-100 h-100 d-flex flex-row justify-content-center align-items-center align-self-center'>
                                                         <FcFile size={60} color={'#fff'}></FcFile>
