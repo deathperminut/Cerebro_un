@@ -4,9 +4,18 @@ import Dropzone from 'react-dropzone';
 import {TbUpload} from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
 
-export default function Step_1() {
+export default function Step_1(props) {
+
+  const readFiles=(event)=>{
+
+    console.log("ARCHIVOS: ",event);
+    props.saveFiles(event);
+    props.next_step();
+
+  }
+  
   return (
-    <Dropzone onDrop={acceptedFiles => console.log("Genial")}   className='shadow'>
+    <Dropzone onDrop={acceptedFiles => readFiles(acceptedFiles)}   className='shadow'>
                 {({getRootProps, getInputProps}) => (
                   <section>
                     <div {...getRootProps()} className="center">

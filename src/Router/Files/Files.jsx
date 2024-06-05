@@ -21,7 +21,7 @@ import { MdOutlineDeleteOutline } from "react-icons/md";
 import { createCategory,deleteCategory,getCategories } from '../../Chat_backend_services/Categorias';
 import Preloader from '../../Components/Loading/Loading';
 import Swal from 'sweetalert2';
-import { deleteDocument, getDocuments } from '../../Chat_backend_services/Documentos';
+import { createDocument, deleteDocument, getDocuments , processDocuments } from '../../Chat_backend_services/Documentos';
 
 
 const { NoOptionsMessage } = components;
@@ -277,6 +277,8 @@ export default function Files() {
     let [seeFiles,setSeeFiles] = React.useState([]);
     const [state,setState] = React.useState('1');
     let [preloader,setPreloader] = React.useState(false);
+    let [selectCat,setSelectCat] = React.useState(null);
+    let [uploadFiles,setUploadFiles] = React.useState(null);
 
     // modal useState
     const [modalShow,setModalShow] = React.useState(false);
@@ -403,6 +405,7 @@ export default function Files() {
     }
     
     const  GenerateCategory=async()=>{
+        
         if(newCat == ""){
             Swal.fire({
                 icon: 'info',
@@ -431,7 +434,6 @@ export default function Files() {
                 setNewCat("");
                 setModalShow(false);
                 loadCategories();
-                
                 Swal.fire({
                     icon: 'success',
                     title: 'Categoria creada con éxito'
@@ -439,6 +441,55 @@ export default function Files() {
             }
 
         }
+    }
+
+    const processFiles=async()=>{
+
+        for (var i=0;i<uploadFiles.length;i++){
+            // iteramos para procesar cada archivos
+            let body=new FormData();
+            body.append('categoria',selectCat);
+            body.append('nombre',uploadFiles[i].name);
+            body.append('archivo',uploadFiles[i]);
+            body.append('descripcion','Archivo');
+            let result = undefined;
+            result =  await createDocument(body).catch((error)=>{
+                console.log(error);
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Problemas para procesar archivos'
+                });
+                setState('2');
+            })
+            if(result){
+                console.log("ARCHIVO : ",result.data);
+            }
+
+        }
+
+        // FINALIZAMOS CON PROCESAR LA CATEGORIA
+        let result2 =  undefined;
+        result2 = await processDocuments(selectCat).catch((error)=>{
+            console.log(error);
+            setState('2');
+            Swal.fire({
+                icon: 'info',
+                title: 'Problemas para procesar archivos'
+            });
+        });
+
+        if(result2){
+            console.log("EXITOS : ",result2)
+            setUploadFiles([]);
+            setState('1');
+            loadDocuments();
+            handleClose4();
+            Swal.fire({
+                icon: 'success',
+                title: 'Archivos procesados correctamente'
+            });
+        }
+
     }
 
 
@@ -538,7 +589,10 @@ export default function Files() {
                                                     <td className='align-middle'>
                                                         <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
                                                             <div  className='checks-radios- me-3'>
-                                                                <FaFileUpload size={20} color='white' cursor={'pointer'} onClick={handleShow4}></FaFileUpload>
+                                                                <FaFileUpload size={20} color='white' cursor={'pointer'} onClick={()=>{
+                                                                setSelectCat(obj?.id);
+                                                                handleShow4();
+                                                                }}></FaFileUpload>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -609,12 +663,24 @@ export default function Files() {
             <Offcanvas className="offcanvasBodyV2" show={show4} onHide={handleClose4}>
                 <Offcanvas.Header closeButton className='offcanvas-header pb-4 padding-40-'>
                     <h2 className='m-0 p-0 lh-sm fs-3- ff-monse-regular- fw-bold tx-dark-purple- font_medium' style={{'color':'#FFF'}}>Procesar documentos</h2>
-                    <button onClick={handleClose4} id='buttonClose' type="button"
+                    {state !== '3' ? 
+                    
+                    <></>
+                    :
+
+                    <button onClick={()=>{
+                        setUploadFiles([]);
+                        setState('1');
+                        handleClose4();
+                    }} id='buttonClose' type="button"
                         className='btn-close-offcanvas'
                         style={{'display':'flex',alignItems:'center','justifyContent':'center'}}
                         data-bs-dismiss="offcanvas">
                         <IoIosClose size={30} className='fa icon-close'></IoIosClose>
                     </button>
+
+                    }
+                    
                     </Offcanvas.Header>
                     <Offcanvas.Body className='offcanvas-body' style={{'width':'100%','display':'flex','justifyContent':'center','flexDirection':'column','alignItems':'center'}}>
                         <div className='descriptionFiles'>
@@ -627,30 +693,41 @@ export default function Files() {
                         }
                         <div className='FilesContainer flex-wrap overflow-y' style={{'marginTop':'40px','padding':'20px','display':'flex','flexDirection':'row'}}>
                                     {state == '1' ? 
-                                    <Step_1></Step_1>
+                                    <Step_1 next_step={()=>setState('2')}  saveFiles={(files)=>setUploadFiles(files)}>
+
+                                    </Step_1>
                                     :
                                     <></>
                                     }
 
                                     {state == '2' || state == '3' ? 
-                                    <Step_2></Step_2>
+                                    <Step_2 saveFiles={uploadFiles} updateFiles={setUploadFiles} previous_step={()=>{setState('1')}} next_step={()=>setState('3')} state={state}
+                                    ></Step_2>
                                     :
                                     <></>
                                     }
 
                                     
                         </div>
+                        {state == '3' ? 
+                        <></>
+                        :
                         <div className='divsContainer'>
                             <div className='buttonElement' onClick={()=>{
                                 if(state == '1'){
                                     setState('2')
                                 }else if(state=="2"){
-                                    setState('3')
+                                    // Proccess files
+                                    setState('3');
+                                    processFiles();
+                                    
                                 }
                             }}>
                                 <span className='white font_Light'>Siguiente</span>
                             </div>
                         </div>
+                        }
+                        
                     </Offcanvas.Body>
             </Offcanvas>
         </>

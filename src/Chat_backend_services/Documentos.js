@@ -3,12 +3,9 @@ import { environment } from "../environments/environments";
 
 
 
-const createDocument=async(name)=>{
+const createDocument=async(body)=>{
 
     let path = environment.serverBackend + environment.createDocument
-    let body = {
-        'nombre':name
-    }
     return axios.post(path,body)
 
 }
@@ -26,5 +23,11 @@ const getDocuments=async()=>{
 }
 
 
+const processDocuments=async(Id)=>{
+    let path =  environment.serverBackend + environment.procesarDocumentos+Id
+    return axios.get(path)
+}
 
-export {createDocument,deleteDocument,getDocuments}
+
+
+export {createDocument,deleteDocument,getDocuments,processDocuments}
