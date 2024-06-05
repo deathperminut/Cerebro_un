@@ -50,4 +50,6 @@ export const environment = {
     'deleteDocument':'core/documento/',
     'procesarDocumentos':'core/process/?categories=',
 
+    'procesarQuery':'core/query/'
+
 }

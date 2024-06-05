@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal'
 import {useNavigate} from 'react-router-dom';
 import Select, { components } from 'react-select'
 import makeAnimated from 'react-select/animated';
+import { AppContext } from '../../Context';
 
 const { NoOptionsMessage } = components;
 
@@ -666,7 +667,26 @@ const ListAreas = [
 ]
 
 export default function ModalSelect(props) {
-    let navigate = useNavigate()
+    let navigate = useNavigate();
+
+    /* AppContext */
+    let {categories,setCategories,documents,setDocuments,selectCategory,setSelectCategory} = React.useContext(AppContext);
+    
+
+    const RestructureData=(data)=>{
+
+      let newData  = data.map((obj,index)=>{
+        return(
+          {
+            'value':obj?.id,
+            'label':obj?.nombre
+          }
+        )
+      })
+
+      return newData
+
+    }
 
     const readSelect=(event)=>{
         // if(event.value== "Auditoria"){
@@ -695,7 +715,7 @@ export default function ModalSelect(props) {
             Para crear un nuevo chat selecciona el area al cual quieres asociarla
         </p>
         <div className='form-floating inner-addon- left-addon-'  style={{'position':'relative','left':'0px'}}>
-                        <Select  options={ListAreas} onChange={readSelect}  id='customSelect'  components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Area" styles={selectStyles} isClearable={false}/>
+                        <Select  options={RestructureData(categories)} onChange={props.selectArea}  id='customSelect'  components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Area" styles={selectStyles} isClearable={false}/>
         </div>
       </Modal.Body>
       <Modal.Footer>

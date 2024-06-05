@@ -13,6 +13,7 @@ import { MdOutlineDeleteOutline } from "react-icons/md";
 import Swal from 'sweetalert2'
 import { getConversations, loadChatHistorial ,createConversation,getAnswer, deleteChat } from '../../chat_services/chat_services'
 import NavBar from '../../Components/NavBar/NavBar'
+import { processConversation } from '../../Chat_backend_services/Chat'
 
 export default function Chat() {
 
@@ -65,8 +66,10 @@ export default function Chat() {
   let [idChat,setIdChat] = React.useState(null);
   let [conversation,setConversation] = React.useState([]);
   let [newChat,setNewChat] = React.useState(false);
+  let [Area,setArea] = React.useState('');
   // modal useState
   const [modalShow,setModalShow] = React.useState(false);
+
 
 
 
@@ -88,9 +91,9 @@ export default function Chat() {
 
   const getNewChat=()=>{
     setModalShow(true);
-    setNewChat(true);
-    setChatSelect(true);
-    setConversation([]);
+    //setNewChat(true);
+    //setChatSelect(true);
+    //setConversation([]);
 
   }
 
@@ -112,8 +115,8 @@ export default function Chat() {
       lista_conversacion.push({
         position:"left",
         type:"text",
-        avatar: require("../../assets/images/cerebro.png"),
-        title:"Cerebro UN",
+        avatar: require("../../assets/images/cerebro_.png"),
+        title:"Cerebro",
         text:information_chat[i][1],
       })
     }
@@ -133,87 +136,76 @@ export default function Chat() {
     })
     setConversation(lista_copia);
     scrollToBottom()
+    return lista_copia;
+  }
+
+
+  const appendConversation2=(conv,lista)=>{
+    console.log("Conversación: ",conversation);
+    lista.push({
+      position:"left",
+      type:"text",
+      title:"Cerebro",
+      avatar: require("../../assets/images/cerebro_.png"),
+      text:conv.result,
+      pdfs:conv.source_documents
+    })
+    setConversation(lista);
+    scrollToBottom()
   }
 
 
 
 
   const chatear=async()=>{
-    // if (inputReferance.current.value !== '') {
+
+
+    if (inputReferance.current.value !== '') {
     
-    // let conv = inputReferance.current.value
-    // inputReferance.current.value = ""
-    //   // observamos si el chat es nuevo
-    // // agregamos el chat nuestro a la conversación
-    // appendConversation(conv);
-    // if(newChat){
-      
-    //   // en caso de ser nuevo creamos la conversación
-    //   let result_1 =  undefined;
-    //   setStatusBrain('Escribiendo...');
-    //   result_1 =  await createConversation().catch((error)=>{
-    //     console.log(error);
-    //     setStatusBrain('Online');
-    //     Swal.fire({
-    //       icon: 'info',
-    //       title: 'Problemas para crear conversación'
-    //     });
-    //   })
+      let conv = inputReferance.current.value
+      inputReferance.current.value = ""
+      //   // observamos si el chat es nuevo
+      // // agregamos el chat nuestro a la conversación
+      let lista = appendConversation(conv);
+      sendMessage(Area,conv,lista)
 
-    //   if(result_1){
-    //     console.log("DATA: ",result_1.data);
-    //     // Agregamos y el id en el historial del chat
-        
-    //     // enviamos el mensaje para generar la conversación
-    //     sendMessage(result_1.data.id_conversation.toString(),conv)
-    //     // como la conversación fue nueva volvemos a cargar todos los chats
-    //     loadHistorial_new(result_1.data.id_conversation.toString(),conv);
-    //     setIdChat(result_1.data.id_conversation.toString());
-    //     setNewChat(false);
-    //   }
-
-    // }else{
-    //   sendMessage(idChat,conv)
-    // }
-
-    // }else{
-    //   Swal.fire({
-    //     icon: 'info',
-    //     title: 'Escribe algo dentro del campo de texto para realizar empezar una conversación'
-    //   });
-    // }
+      }else{
+        Swal.fire({
+          icon: 'info',
+          title: 'Escribe algo dentro del campo de texto para realizar empezar una conversación'
+        });
+      }
     
 
   }
 
 
   function scrollToBottom() {
-    var container = document.getElementById("ChatContainer");
-    container.scrollTop = container.scrollHeight - container.clientHeight+10000;
+    // var container = document.getElementById("ChatContainer");
+    // container.scrollTop = container.scrollHeight - container.clientHeight+10000;
   }
 
 
 
 
-  const sendMessage=async(idChat,conv)=>{
+  const sendMessage=async(idChat,conv,lista)=>{
 
-      // let result =  undefined;
-      // setStatusBrain('Escribiendo...');
-      // result =  await getAnswer({'human_message':conv,'id_conversation':idChat}).catch((error)=>{
-      //   console.log(error);
-      //   setStatusBrain('Online');
-      //   Swal.fire({
-      //     icon: 'info',
-      //     title: 'Problemas para generar conversación'
-      //   });
-      // })
+      let result =  undefined;
+      setStatusBrain('Escribiendo...');
+      result =  await processConversation({'category':idChat,'query':conv}).catch((error)=>{
+          console.log(error);
+          setStatusBrain('Online');
+          Swal.fire({
+            icon: 'info',
+            title: 'Problemas para generar conversación'
+          });
+        })
 
-      // if(result){
-      //   //setPreloader(false);
-      //   // agregamos la conversación al conjunto de datos
-      //   // limpiamos el input
-      //   getOldConversations(idChat);
-      // }
+      if(result){
+          setStatusBrain('Online');
+          console.log("resultados chat: ",result.data);
+          appendConversation2(result.data.response,lista)
+      }
 
   }
 
@@ -310,20 +302,24 @@ export default function Chat() {
               />
             </div>
             <div className='card-footer bg-transparent- border-0' style={{'marginTop':''}}>
-              <Input
-                placeholder="Escribe un mensaje aquí"
-                multiline={true}
-                onKeyPress={(event)=>{
-                  if (event.key === 'Enter') {
-                    // Aquí puedes realizar la acción que desees cuando se presione "Enter"
-                    chatear();
+                {statusBrain == 'Escribiendo...' ? 
+                <></>
+                :
+                <Input
+                  placeholder="Escribe un mensaje aquí"
+                  multiline={true}
+                  onKeyPress={(event)=>{
+                    if (event.key === 'Enter') {
+                      // Aquí puedes realizar la acción que desees cuando se presione "Enter"
+                      chatear();
+                    }
+                  }}
+                  referance={inputReferance}
+                  rightButtons={
+                    <Button className='send-button-' onClick={chatear} text="Enviar" />
                   }
-                }}
-                referance={inputReferance}
-                rightButtons={
-                  <Button className='send-button-' onClick={chatear} text="Enviar" />
+                />
                 }
-              />
             </div>
           </div>
           </div>
@@ -380,6 +376,20 @@ export default function Chat() {
       </Offcanvas>
       <ModalSelect
             show={modalShow}
+            selectArea={
+              (event)=>{
+                if(event){
+                  // seteamos el area
+                  setArea(event.value);
+                  // vamos a la visión del chat
+                  setNewChat(true);
+                  setChatSelect(true);
+                  setConversation([]);
+                  // cerramos el modal
+                  setModalShow(false);
+                }
+              }
+            }
             onHide={()=>setModalShow(false)}></ModalSelect>
     </React.Fragment>
   )
