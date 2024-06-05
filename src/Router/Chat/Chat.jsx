@@ -14,6 +14,7 @@ import Swal from 'sweetalert2'
 import { getConversations, loadChatHistorial ,createConversation,getAnswer, deleteChat } from '../../chat_services/chat_services'
 import NavBar from '../../Components/NavBar/NavBar'
 import { processConversation } from '../../Chat_backend_services/Chat'
+import PdfComp from '../PdfComp/PdfComp'
 
 export default function Chat() {
 
@@ -209,6 +210,21 @@ export default function Chat() {
 
   }
 
+  /* OFF CANVAS PDF */
+  const [show2, setShow2] = React.useState(false);
+  const handleClose2 = () => setShow2(false);
+  const handleShow2 = () => setShow2(true);
+  let [documentos,setDocumentos] = React.useState([]);
+
+  const DataPdf=(Message)=>{
+
+    console.log("MENSAJE: ",Message);
+    setDocumentos(Message?.pdfs)
+    handleShow2();
+
+
+  }
+
 
 
 
@@ -297,6 +313,7 @@ export default function Chat() {
                     behavior: "auto"
                   });
                 }}
+                onTitleClick={(message)=>DataPdf(message)}
                 toBottomHeight={'100%'}
                 dataSource={conversation}
               />
@@ -390,7 +407,22 @@ export default function Chat() {
                 }
               }
             }
-            onHide={()=>setModalShow(false)}></ModalSelect>
+            onHide={()=>setModalShow(false)}>
+      </ModalSelect>
+      <Offcanvas className="offcanvasBodyV2" show={show2} onHide={handleClose2}>
+          <Offcanvas.Header closeButton className='offcanvas-header pb-4 padding-40-'>
+              <h2 className='m-0 p-0 lh-sm fs-3- ff-monse-regular- fw-bold tx-dark-purple- font_medium blue__'>Pdf</h2>
+              <button onClick={handleClose2} id='buttonClose' type="button"
+                className='btn-close-offcanvas'
+                style={{'display':'flex',alignItems:'center','justifyContent':'center'}}
+                data-bs-dismiss="offcanvas">
+                <IoIosClose size={30} className='fa icon-close'></IoIosClose>
+              </button>
+            </Offcanvas.Header>
+            <Offcanvas.Body className='offcanvas-body' style={{'width':'100%','display':'flex','justifyContent':'center'}}>
+                <PdfComp documentos = {documentos}></PdfComp>
+            </Offcanvas.Body>
+      </Offcanvas>
     </React.Fragment>
   )
 }
