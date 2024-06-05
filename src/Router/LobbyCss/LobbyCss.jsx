@@ -71,7 +71,7 @@ export default function LobbyCss() {
       if(result){
         setPreloader(false);
         console.log("Documentos: ",result.data);
-        let productos = []
+        let productos = result.data
         const productosPorCategoria = productos.reduce((agrupado, producto) => {
           const categoria = producto.categoria;
           if (!agrupado[categoria]) {
