@@ -28,12 +28,12 @@ export default function CreateCategory(props) {
           </p>
           <div className='form-floating inner-addon- left-addon-'  style={{'position':'relative','left':'0px'}}>
                         <div className='form-floating inner-addon- left-addon-'>
-                                <input type="text" className='form-control form-control_2' id='user' placeholder="Usuario" />
+                                <input value={props.name} onChange={(event)=>props.editName(event.target.value)} type="text" className='form-control form-control_2' id='user' placeholder="Usuario" />
                                 <label className='fs-5- ff-monse-regular-'>Nombre</label>
                         </div>         
           </div>
           <div className='divsContainer'>
-            <div className='buttonElement'>
+            <div onClick={props.create} className='buttonElement'>
                 <span className='white font_Light'>Crear</span>
             </div>
           </div>

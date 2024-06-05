@@ -6,22 +6,109 @@ import Slider from "react-slick";
 import BrainModule from '../../img/cerebro_.png'
 import { useNavigate } from 'react-router-dom';
 import LogoDocuments from '../../Components/LogoDocuments/LogoDocuments';
+import {AppContext} from '../../Context/index'
+/* COMPONENTS */
+
+import Preloader from '../../Components/Loading/Loading';
+import { createCategory } from '../../Chat_backend_services/Categorias';
+import { getCategories } from '../../Chat_backend_services/Categorias';
+import Swal from 'sweetalert2';
+import { getDocuments } from '../../Chat_backend_services/Documentos';
+
 
 export default function LobbyCss() {
+
+      /* AppContext */
+      let {categories,setCategories,documents,setDocuments,selectCategory,setSelectCategory} = React.useContext(AppContext);
+      
+      /* use State */
+      let [preloader,setPreloader] = React.useState(false);
+      
+      /* useEffect */
+
+      React.useEffect(()=>{
+        // Load Data categories
+        loadCategories();
+        // load Documents
+        loadDocuments();
+      },[])
+
+    const loadCategories=async()=>{
+
+       let result  = undefined
+       setPreloader(true);
+       result =  await getCategories().catch((error)=>{
+         setPreloader(false);
+         console.log(error);
+         Swal.fire({
+           icon: 'info',
+           title: 'Problemas al cargar datos'
+         });
+       })
+
+       if(result){
+          setPreloader(false);
+          console.log("CATEGORIAS: ",result.data);
+          setCategories(result.data);
+       }
+
+    }
+
+    const loadDocuments=async()=>{
+
+      let result  = undefined
+      setPreloader(true);
+      result =  await getDocuments().catch((error)=>{
+        setPreloader(false);
+        console.log(error);
+        Swal.fire({
+          icon: 'info',
+          title: 'Problemas al cargar datos'
+        });
+        
+      })
+
+      if(result){
+        setPreloader(false);
+        console.log("Documentos: ",result.data);
+        let productos = []
+        const productosPorCategoria = productos.reduce((agrupado, producto) => {
+          const categoria = producto.categoria;
+          if (!agrupado[categoria]) {
+            agrupado[categoria] = [];
+          }
+          agrupado[categoria].push(producto);
+          return agrupado;
+        }, {});
+        
+        console.log("AGRUPADOS: ",productosPorCategoria);
+        setDocuments(productosPorCategoria);
+      }
+
+   }
+  
    
     const navigate=useNavigate();
 
     // modal useState
     const [modalShow,setModalShow] = React.useState(false);
+    
+    // 
+    
 
   return (
       <>
+        {preloader  ?  
+        <Preloader></Preloader>
+        :
+        <></>
+        }
         <NavBar></NavBar>
         <div className='Body' style={{backgroundImage: `url(${Fondo})`,backgroundSize:'cover'}}>
            <div className='LobbyContainer'>
                     <div className='DataLanding'>
-                            <p className='TitleLanding font_medium Animation'>Css S.A</p>
-                            <p className='SubtitleLanding font_Light Animation'>Empresa de desarrollo e innovación</p> 
+                            <p className='TitleLanding font_medium Animation'>Cerebro</p>
+                            <p className='SubtitleLanding font_Light Animation'>Centro de preguntas</p> 
                     </div>
                     <div className='DataLandingV2' style={{width:'100%',maxWidth:'1150px','marginBottom':'60px',}}>
                                     <div key={1} className={`LandingModule`} >

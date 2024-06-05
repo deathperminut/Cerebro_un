@@ -3,5 +3,6 @@ export const configuraciones={
     server:'https://onedrive.efigasprojecthub.site/',
     //serverAirflow:'http://localhost:8000/'
     serverAirflow:'https://inference.efigasprojecthub.site/',
-    serverChat:'https://brain.efigasprojecthub.site/'
+    serverChat:'https://brain.efigasprojecthub.site/',
+    serverBackend:'http://localhost:8000/'
 }

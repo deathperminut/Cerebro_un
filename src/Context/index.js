@@ -21,10 +21,17 @@ function ProviderContext(props){
 
     let [indexFile,setIndexFile] = React.useState(null);
 
+
+    /* CONTEXT DEMO */
+
+    let [categories,setCategories] = React.useState([]);
+    let [documents,setDocuments] =  React.useState({});
+    let [selectCategory,setSelectCategory] = React.useState([]);
+
     return (
         <AppContext.Provider value={{data,setData,
         modelsFile,setModelsFile,userData,setUserData,token,setToken,rol,setRol,
-        indexFile,setIndexFile}}>
+        indexFile,setIndexFile,categories,setCategories,documents,setDocuments,selectCategory,setSelectCategory}}>
             {props.children}
         </AppContext.Provider>
     )

@@ -10,6 +10,7 @@ import { IoIosClose } from "react-icons/io";
 import { FaFileUpload } from "react-icons/fa";
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import { FcFile } from "react-icons/fc";
+import { AppContext } from '../../Context';
 import { IoDocuments } from "react-icons/io5";
 import Step_1 from './Components/Step_1/Step_1';
 import Step_2 from './Components/Step_2/Step_2';
@@ -17,7 +18,10 @@ import Step_3 from './Components/Step_3/Step_3';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { MdOutlineDeleteOutline } from "react-icons/md";
 
-
+import { createCategory,deleteCategory,getCategories } from '../../Chat_backend_services/Categorias';
+import Preloader from '../../Components/Loading/Loading';
+import Swal from 'sweetalert2';
+import { getDocuments } from '../../Chat_backend_services/Documentos';
 
 
 const { NoOptionsMessage } = components;
@@ -264,6 +268,16 @@ const ListAreas = [
 
 export default function Files() {
 
+    /* AppContext */
+    let {categories,setCategories,documents,setDocuments,selectCategory,setSelectCategory} = React.useContext(AppContext);
+    
+    /* useStates */
+
+    let [newCat,setNewCat] = React.useState("");
+    let [seeFiles,setSeeFiles] = React.useState([]);
+    const [state,setState] = React.useState('1');
+    let [preloader,setPreloader] = React.useState(false);
+
     // modal useState
     const [modalShow,setModalShow] = React.useState(false);
     const [modalShow2,setModalShow2] = React.useState(false);
@@ -279,13 +293,137 @@ export default function Files() {
     const handleClose4 = () => setShow4(false);
     const handleShow4 = () => setShow4(true);
 
-    /* useState */
+    
+    /* functions */
 
-    const [state,setState] = React.useState('1');
+    const loadCategories=async()=>{
+
+        let result  = undefined
+        setPreloader(true);
+        result =  await getCategories().catch((error)=>{
+          setPreloader(false);
+          console.log(error);
+          Swal.fire({
+            icon: 'info',
+            title: 'Problemas al cargar datos'
+          });
+        })
+ 
+        if(result){
+           setPreloader(false);
+           console.log("CATEGORIAS: ",result.data);
+           setCategories(result.data);
+        }
+ 
+     }
+
+     const DeleteCategory=async(Id)=>{
+
+        let result  = undefined
+        setPreloader(true);
+        result =  await deleteCategory(Id).catch((error)=>{
+          setPreloader(false);
+          console.log(error);
+          Swal.fire({
+            icon: 'info',
+            title: 'Problemas para eliminar categoria'
+          });
+        })
+ 
+        if(result){
+           setPreloader(false);
+           Swal.fire({
+            icon: 'success',
+            title: 'Categoria eliminada correctamente'
+           });
+           loadCategories();
+        }
+ 
+     }
+ 
+ 
+     const loadDocuments=async()=>{
+ 
+       let result  = undefined
+       setPreloader(true);
+       result =  await getDocuments().catch((error)=>{
+         setPreloader(false);
+         console.log(error);
+         Swal.fire({
+           icon: 'info',
+           title: 'Problemas al cargar datos'
+         });
+         
+       })
+ 
+       if(result){
+         setPreloader(false);
+         console.log("Documentos: ",result.data);
+         let productos = []
+         const productosPorCategoria = productos.reduce((agrupado, producto) => {
+           const categoria = producto.categoria;
+           if (!agrupado[categoria]) {
+             agrupado[categoria] = [];
+           }
+           agrupado[categoria].push(producto);
+           return agrupado;
+         }, {});
+         
+         console.log("AGRUPADOS: ",productosPorCategoria);
+         setDocuments(productosPorCategoria);
+       }
+ 
+    }
+    
+    const  GenerateCategory=async()=>{
+        if(newCat == ""){
+            Swal.fire({
+                icon: 'info',
+                title: 'Debes registrar un nombre para la categoria'
+            });
+        }else{
+
+            let result  = undefined
+            setPreloader(true);
+            result =  await createCategory(newCat).catch((error)=>{
+                setPreloader(false);
+                console.log(error);
+                setNewCat("");
+                setModalShow(false);
+                Swal.fire({
+                icon: 'info',
+                title: 'Problemas al crear la categoria'
+                });
+                
+            })
+        
+            if(result){
+                setPreloader(false);
+                console.log("CATEGORIA CREADA: ",result.data);
+                // volvemos a cargar los datos de la categoria
+                setNewCat("");
+                setModalShow(false);
+                loadCategories();
+                
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Categoria creada con éxito'
+                });
+            }
+
+        }
+    }
+
+
 
 
     return (
         <> 
+            {preloader ? 
+            <Preloader></Preloader>
+            :
+            <></>
+            }
             <NavBar></NavBar>
             <div className='bodyFiles'>
                 <div className='descriptionFiles'>
@@ -330,315 +468,39 @@ export default function Files() {
                                 </th>
                             </tr>
                             </thead>
-                            <tbody>
-                                        <tr >
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                <div  className='checks-radios- me-3'>
-                                                    <MdAutoDelete size={20} color='#F67697' cursor={'pointer'}></MdAutoDelete>
-                                                </div>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div id='internal-form' className='w-100' style={{'display':'flex','alignItems':'center','justifyContent':'center'}}>
-                                                    <span className='font_medium whiteV2' style={{'cursor':'pointer'}} onClick={()=>setModalShow2(true)}>Derecho Penal</span>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                    <div  className='checks-radios- me-3'>
-                                                        <IoDocuments size={20} color='white' cursor={'pointer'} onClick={handleShow3}></IoDocuments>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                    <div  className='checks-radios- me-3'>
-                                                        <FaFileUpload size={20} color='white' cursor={'pointer'} onClick={handleShow4}></FaFileUpload>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr >
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                <div  className='checks-radios- me-3'>
-                                                    <MdAutoDelete size={20} color='#F67697' cursor={'pointer'}></MdAutoDelete>
-                                                </div>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div id='internal-form' className='w-100' style={{'display':'flex','alignItems':'center','justifyContent':'center'}}>
-                                                    <span className='font_medium whiteV2'>Derecho Penal</span>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                    <div  className='checks-radios- me-3'>
-                                                        <IoDocuments size={20} color='white' cursor={'pointer'}></IoDocuments>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                    <div  className='checks-radios- me-3'>
-                                                        <FaFileUpload size={20} color='white' cursor={'pointer'}></FaFileUpload>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr >
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                <div  className='checks-radios- me-3'>
-                                                    <MdAutoDelete size={20} color='#F67697' cursor={'pointer'}></MdAutoDelete>
-                                                </div>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div id='internal-form' className='w-100' style={{'display':'flex','alignItems':'center','justifyContent':'center'}}>
-                                                    <span className='font_medium whiteV2' style={{'cursor':'pointer'}}>Derecho Penal</span>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                    <div  className='checks-radios- me-3'>
-                                                        <IoDocuments size={20} color='white' cursor={'pointer'}></IoDocuments>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                    <div  className='checks-radios- me-3'>
-                                                        <FaFileUpload size={20} color='white' cursor={'pointer'}></FaFileUpload>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr >
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                <div  className='checks-radios- me-3'>
-                                                    <MdAutoDelete size={20} color='#F67697' cursor={'pointer'}></MdAutoDelete>
-                                                </div>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div id='internal-form' className='w-100' style={{'display':'flex','alignItems':'center','justifyContent':'center'}}>
-                                                    <span className='font_medium whiteV2'>Derecho Penal</span>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                    <div  className='checks-radios- me-3'>
-                                                        <IoDocuments size={20} color='white' cursor={'pointer'}></IoDocuments>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                    <div  className='checks-radios- me-3'>
-                                                        <FaFileUpload size={20} color='white' cursor={'pointer'}></FaFileUpload>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr >
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                <div  className='checks-radios- me-3'>
-                                                    <MdAutoDelete size={20} color='#F67697' cursor={'pointer'}></MdAutoDelete>
-                                                </div>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div id='internal-form' className='w-100' style={{'display':'flex','alignItems':'center','justifyContent':'center'}}>
-                                                    <span className='font_medium whiteV2'>Derecho Penal</span>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                    <div  className='checks-radios- me-3'>
-                                                        <IoDocuments size={20} color='white' cursor={'pointer'}></IoDocuments>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                    <div  className='checks-radios- me-3'>
-                                                        <FaFileUpload size={20} color='white' cursor={'pointer'}></FaFileUpload>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr >
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                <div  className='checks-radios- me-3'>
-                                                    <MdAutoDelete size={20} color='#F67697' cursor={'pointer'}></MdAutoDelete>
-                                                </div>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div id='internal-form' className='w-100' style={{'display':'flex','alignItems':'center','justifyContent':'center'}}>
-                                                    <span className='font_medium whiteV2'>Derecho Penal</span>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                    <div  className='checks-radios- me-3'>
-                                                        <IoDocuments size={20} color='white' cursor={'pointer'}></IoDocuments>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                    <div  className='checks-radios- me-3'>
-                                                        <FaFileUpload size={20} color='white' cursor={'pointer'}></FaFileUpload>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr >
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                <div  className='checks-radios- me-3'>
-                                                    <MdAutoDelete size={20} color='#F67697' cursor={'pointer'}></MdAutoDelete>
-                                                </div>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div id='internal-form' className='w-100' style={{'display':'flex','alignItems':'center','justifyContent':'center'}}>
-                                                    <span className='font_medium whiteV2'>Derecho Penal</span>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                    <div  className='checks-radios- me-3'>
-                                                        <IoDocuments size={20} color='white' cursor={'pointer'}></IoDocuments>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                    <div  className='checks-radios- me-3'>
-                                                        <FaFileUpload size={20} color='white' cursor={'pointer'}></FaFileUpload>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr >
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                <div  className='checks-radios- me-3'>
-                                                    <MdAutoDelete size={20} color='#F67697' cursor={'pointer'}></MdAutoDelete>
-                                                </div>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div id='internal-form' className='w-100' style={{'display':'flex','alignItems':'center','justifyContent':'center'}}>
-                                                    <span className='font_medium whiteV2'>Derecho Penal</span>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                    <div  className='checks-radios- me-3'>
-                                                        <IoDocuments size={20} color='white' cursor={'pointer'}></IoDocuments>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                    <div  className='checks-radios- me-3'>
-                                                        <FaFileUpload size={20} color='white' cursor={'pointer'}></FaFileUpload>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr >
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                <div  className='checks-radios- me-3'>
-                                                    <MdAutoDelete size={20} color='#F67697' cursor={'pointer'}></MdAutoDelete>
-                                                </div>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div id='internal-form' className='w-100' style={{'display':'flex','alignItems':'center','justifyContent':'center'}}>
-                                                    <span className='font_medium whiteV2'>Derecho Penal</span>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                    <div  className='checks-radios- me-3'>
-                                                        <IoDocuments size={20} color='white' cursor={'pointer'}></IoDocuments>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                    <div  className='checks-radios- me-3'>
-                                                        <FaFileUpload size={20} color='white' cursor={'pointer'}></FaFileUpload>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr >
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                <div  className='checks-radios- me-3'>
-                                                    <MdAutoDelete size={20} color='#F67697' cursor={'pointer'}></MdAutoDelete>
-                                                </div>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div id='internal-form' className='w-100' style={{'display':'flex','alignItems':'center','justifyContent':'center'}}>
-                                                    <span className='font_medium whiteV2'>Derecho Penal</span>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                    <div  className='checks-radios- me-3'>
-                                                        <IoDocuments size={20} color='white' cursor={'pointer'}></IoDocuments>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                    <div  className='checks-radios- me-3'>
-                                                        <FaFileUpload size={20} color='white' cursor={'pointer'}></FaFileUpload>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr >
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                <div  className='checks-radios- me-3'>
-                                                    <MdAutoDelete size={20} color='#F67697' cursor={'pointer'}></MdAutoDelete>
-                                                </div>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div id='internal-form' className='w-100' style={{'display':'flex','alignItems':'center','justifyContent':'center'}}>
-                                                    <span className='font_medium whiteV2'>Derecho Penal</span>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                    <div  className='checks-radios- me-3'>
-                                                        <IoDocuments size={20} color='white' cursor={'pointer'}></IoDocuments>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td className='align-middle'>
-                                                <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                                                    <div  className='checks-radios- me-3'>
-                                                        <FaFileUpload size={20} color='white' cursor={'pointer'}></FaFileUpload>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                            <tbody>    
+                                        {categories.map((obj,index)=>{
+                                            return(
+                                                <tr key={index}>
+                                                    <td className='align-middle'>
+                                                        <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
+                                                        <div  className='checks-radios- me-3'>
+                                                            <MdAutoDelete size={20} color='#F67697' cursor={'pointer'} onClick={()=>DeleteCategory(obj?.id)}></MdAutoDelete>
+                                                        </div>
+                                                        </div>
+                                                    </td>
+                                                    <td className='align-middle'>
+                                                        <div id='internal-form' className='w-100' style={{'display':'flex','alignItems':'center','justifyContent':'center'}}>
+                                                            <span className='font_medium whiteV2'  >{obj?.nombre}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td className='align-middle'>
+                                                        <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
+                                                            <div  className='checks-radios- me-3'>
+                                                                <IoDocuments size={20} color='white' cursor={'pointer'} onClick={handleShow3}></IoDocuments>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td className='align-middle'>
+                                                        <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
+                                                            <div  className='checks-radios- me-3'>
+                                                                <FaFileUpload size={20} color='white' cursor={'pointer'} onClick={handleShow4}></FaFileUpload>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })}
                                         
                             </tbody>
                             </table>
@@ -650,7 +512,7 @@ export default function Files() {
             </div>
             {/* MODALS CRUD CATEGORIES */}
             <CreateCategory  show={modalShow}
-            onHide={()=>setModalShow(false)}></CreateCategory>
+            onHide={()=>setModalShow(false)} name={newCat} editName={(name)=>setNewCat(name)} create = {GenerateCategory}></CreateCategory>
 
             <EditCategory  show={modalShow2}
             onHide={()=>setModalShow2(false)}></EditCategory>

@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { HashRouter } from 'react-router-dom';
+import { ProviderContext } from './Context/index.js';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/jquery/dist/jquery.slim.min.js';
@@ -14,7 +15,10 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <HashRouter>
-      <App />
+      <ProviderContext>
+          <App />
+      </ProviderContext>
+      
     </HashRouter>
   </React.StrictMode>
 );
